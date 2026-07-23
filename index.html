@@ -1,0 +1,504 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>トレ飯相棒</title>
+<style>
+:root{
+  --bg:#0c0e12; --card:#15181f; --card2:#1c212b; --line:#252b37; --line2:#323a49;
+  --ink:#f3f6fa; --sub:#8b96a8; --dim:#5a6473;
+  --p:#ff4d5e; --f:#ffb020; --c:#3aa0ff; --ok:#22c55e;
+  --accent:#ff4d5e; --shadow:0 12px 32px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{max-width:480px;margin:0 auto;min-height:100dvh;position:relative;padding-bottom:82px;overflow-x:hidden}
+h1,h2,h3,p{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.hidden{display:none!important}
+::-webkit-scrollbar{width:0}
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 8px}
+.logo{font-weight:900;font-size:20px}.logo b{color:var(--accent)}
+.top-r{display:flex;align-items:center;gap:10px}.gear{font-size:18px;opacity:.65}
+.mode-pill{font-size:12px;font-weight:800;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.mode-pill.bulk{color:var(--f);border-color:#5a4a1f}.mode-pill.cut{color:var(--c);border-color:#1f465a}.mode-pill.keep{color:var(--sub)}
+.view{padding:6px 16px 20px;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.buddy{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);border-radius:20px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:14px;cursor:pointer}
+.buddy .face{font-size:40px;line-height:1;animation:bob 3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.buddy .bubble{flex:1;min-width:0}
+.buddy .bname{font-size:11px;font-weight:800;color:var(--dim);margin-bottom:3px;display:flex;justify-content:space-between}
+.buddy .bname .chat{color:var(--accent)}
+.buddy .btext{font-size:14.5px;font-weight:600;line-height:1.55}
+.fill{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;animation:fade .3s}
+.fill .ic{font-size:20px}.fill .tx{flex:1;font-size:13px;font-weight:700;line-height:1.4}.fill .tx b{color:var(--p)}
+.fill button{font-size:12px;font-weight:800;color:var(--accent);white-space:nowrap;padding:6px 4px}
+.rings{display:flex;justify-content:space-around;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 8px 14px;margin-bottom:12px}
+.ring{display:flex;flex-direction:column;align-items:center;width:33%}
+.ring .label{font-size:11px;font-weight:800;letter-spacing:.06em;margin-top:8px;color:var(--sub)}
+.ring .num{font-size:19px;font-weight:900;margin-top:1px;font-variant-numeric:tabular-nums}
+.ring .num small{font-size:11px;font-weight:700;color:var(--dim)}
+.ring .rem{font-size:10.5px;color:var(--dim);margin-top:1px}
+.kcal{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 16px;margin-bottom:14px}
+.kcal .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.kcal .big{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums}.kcal .big small{font-size:12px;color:var(--dim);font-weight:700}
+.kcal .goal{font-size:12px;color:var(--sub);font-weight:800}
+.track{height:8px;background:#0a0c10;border-radius:999px;overflow:hidden}
+.track>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--p),var(--f));transition:width .5s}
+.sec{display:flex;justify-content:space-between;align-items:center;margin:18px 4px 10px}
+.sec h3{font-size:13px;font-weight:800;color:var(--sub)}.sec a{font-size:12px;color:var(--dim);font-weight:800}
+.meal{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:8px}
+.meal .thumb{width:46px;height:46px;border-radius:12px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;overflow:hidden}
+.meal .thumb img{width:100%;height:100%;object-fit:cover}
+.meal .mid{flex:1;min-width:0}
+.meal .mname{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meal .mmac{font-size:11.5px;color:var(--sub);margin-top:2px}.meal .mmac b{color:var(--p)}
+.meal .kc{font-size:13px;font-weight:800;color:var(--sub);flex-shrink:0;text-align:right;font-variant-numeric:tabular-nums}
+.meal .del{color:var(--dim);font-size:18px;padding:4px 2px 4px 8px}
+.empty{text-align:center;color:var(--dim);font-size:13px;padding:26px 0;font-weight:600;line-height:1.6}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(12,14,18,.93);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding:8px 0 16px;z-index:50}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--dim);font-size:10px;font-weight:800;width:64px}
+.nav button.on{color:var(--ink)}.nav button .ic{font-size:21px}
+.fab{width:58px;height:58px;border-radius:50%;background:var(--accent);color:#fff;font-size:30px;font-weight:300;display:flex;align-items:center;justify-content:center;margin-top:-22px;box-shadow:0 6px 18px rgba(255,77,94,.5);line-height:1}
+.btn{display:block;width:100%;padding:15px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:15.5px;text-align:center}
+.btn.sub{background:var(--card2);color:var(--ink);border:1px solid var(--line)}.btn:active{transform:scale(.98)}
+.field{margin-bottom:15px}.field label{display:block;font-size:12.5px;font-weight:800;color:var(--sub);margin-bottom:7px}
+.input{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--ink);font-size:16px;font-weight:700;padding:13px 14px;outline:none}
+.input:focus{border-color:var(--accent)}
+.two{display:flex;gap:10px}.two>*{flex:1}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;padding:12px 6px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:800;font-size:13px;color:var(--sub)}
+.seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.seg.modes button.on[data-m="bulk"]{background:var(--f);border-color:var(--f);color:#1a1205}
+.seg.modes button.on[data-m="cut"]{background:var(--c);border-color:var(--c);color:#04202b}
+.ob{padding:32px 22px 40px}
+.ob .face{font-size:60px;text-align:center;margin-bottom:12px;animation:bob 3s ease-in-out infinite}
+.ob h1{font-size:25px;font-weight:900;line-height:1.32;margin-bottom:8px}
+.ob .lead{color:var(--sub);font-size:14px;font-weight:600;margin-bottom:26px;line-height:1.65}
+.target-preview{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:16px;margin:18px 0 24px}
+.target-preview .t{font-size:12px;font-weight:800;color:var(--sub);margin-bottom:12px}
+.target-preview .grid{display:flex;justify-content:space-between}.target-preview .g{text-align:center}
+.target-preview .g .v{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums}
+.target-preview .g .k{font-size:10px;font-weight:800;color:var(--dim);margin-top:3px}
+.sheet{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;animation:fade .2s}
+.sheet .panel{background:var(--bg);width:100%;max-width:480px;margin:0 auto;border-radius:22px 22px 0 0;border-top:1px solid var(--line);max-height:94dvh;overflow-y:auto;padding:8px 16px 30px;animation:up .28s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.grip{width:38px;height:4px;background:#333a46;border-radius:9px;margin:8px auto 4px}
+.sheet h2{font-size:18px;font-weight:900;margin:6px 2px 14px}
+.photo-drop{border:2px dashed var(--line2);border-radius:18px;padding:24px 16px;text-align:center;background:var(--card);margin-bottom:14px;position:relative}
+.photo-drop .ic{font-size:32px}.photo-drop .t{font-weight:800;margin-top:8px;font-size:14px}
+.photo-drop .s{font-size:11.5px;color:var(--dim);margin-top:3px}
+.photo-drop img{max-width:100%;border-radius:12px;max-height:170px}
+.photo-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.searchbar{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--ink);font-size:15px;font-weight:600;padding:11px 14px;outline:none;margin-bottom:10px}
+.searchbar:focus{border-color:var(--accent)}
+.analyzing{text-align:center;padding:18px;color:var(--sub);font-weight:700;font-size:13.5px}
+.spin{width:26px;height:26px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 10px;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.foodgrid{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px;max-height:196px;overflow-y:auto}
+.foodgrid button{padding:8px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:12.5px;font-weight:700;color:var(--sub);white-space:nowrap}
+.foodgrid button:active{border-color:var(--accent);color:var(--ink)}
+.result{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:14px;margin:12px 0 0}
+.result .rname{font-weight:800;font-size:15.5px;margin-bottom:2px}
+.result .conf{font-size:11.5px;color:var(--dim);font-weight:700;margin-bottom:14px}.result .conf b{color:var(--ink)}
+.slider-row{margin-bottom:13px}
+.slider-row .sl-top{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800;margin-bottom:6px}.slider-row .sl-top .k{color:var(--sub)}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:9px;background:#0a0c10;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.pmark::-webkit-slider-thumb{background:var(--p)}.fmark::-webkit-slider-thumb{background:var(--f)}.cmark::-webkit-slider-thumb{background:var(--c)}
+.portion{display:flex;gap:8px;margin-bottom:15px}
+.portion button{flex:1;padding:10px 4px;border-radius:11px;background:var(--card2);border:1px solid var(--line);font-weight:800;font-size:12px;color:var(--sub)}
+.portion button.on{border-color:var(--accent);color:var(--ink);background:#241a1c}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--card2);border:1px solid var(--line2);color:var(--ink);font-weight:800;font-size:13.5px;padding:12px 20px;border-radius:14px;z-index:200;transition:.3s;box-shadow:var(--shadow);white-space:nowrap;max-width:90%}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.celebrate{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(12,14,18,.86);backdrop-filter:blur(4px);animation:fade .3s;text-align:center;padding:20px}
+.celebrate .big{font-size:78px;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.celebrate .h{font-size:23px;font-weight:900;margin-top:10px}.celebrate .p{color:var(--sub);font-weight:700;margin-top:6px;font-size:14px}
+.confetti{position:fixed;width:9px;height:14px;z-index:299;top:-20px;border-radius:2px}
+.stat-row{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.stat .k{font-size:11px;font-weight:800;color:var(--sub)}.stat .v{font-size:24px;font-weight:900;margin-top:4px;font-variant-numeric:tabular-nums}
+.stat .v small{font-size:12px;color:var(--dim);font-weight:700}.stat .d{font-size:11px;font-weight:800;margin-top:2px}
+.up{color:var(--f)}.down{color:var(--c)}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px 10px;margin-bottom:14px}
+.chart h3{font-size:12px;color:var(--sub);font-weight:800;margin-bottom:10px}
+.daycard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px}
+.daycard .dh{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800}.daycard .dh .dk{color:var(--sub)}
+.daycard .macs{display:flex;gap:12px;margin-top:8px;font-size:11.5px;font-weight:700}.daycard .macs b{font-size:13px}
+.note{text-align:center;color:var(--dim);font-size:11px;margin-top:18px;line-height:1.6}
+/* chat */
+.chatlog{display:flex;flex-direction:column;gap:10px;margin:6px 0 14px;min-height:120px}
+.msg{max-width:82%;padding:10px 13px;border-radius:15px;font-size:14px;font-weight:600;line-height:1.5}
+.msg.b{align-self:flex-start;background:var(--card2);border:1px solid var(--line);border-bottom-left-radius:5px}
+.msg.u{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.typing{color:var(--dim)}
+.chatbar{display:flex;gap:8px;position:sticky;bottom:0;background:var(--bg);padding-top:6px}
+.chatbar input{flex:1}.chatbar button{padding:0 18px;border-radius:12px;background:var(--accent);color:#fff;font-weight:800}
+</style>
+
+<!-- ONBOARDING -->
+<div id="onboard" class="ob hidden">
+  <div class="face">💪</div>
+  <h1>よお、相棒。<br>今日から一緒にやってこう。</h1>
+  <p class="lead">説教はしない。ただ、お前のタンパク質が足りてるかだけは俺が毎日見てる。まず体のこと教えてくれ。</p>
+  <div class="two">
+    <div class="field"><label>体重 (kg)</label><input class="input o" id="ob-w" type="number" inputmode="decimal" placeholder="72"></div>
+    <div class="field"><label>身長 (cm)</label><input class="input o" id="ob-h" type="number" inputmode="decimal" placeholder="172"></div>
+  </div>
+  <div class="two">
+    <div class="field"><label>年齢</label><input class="input o" id="ob-age" type="number" inputmode="numeric" placeholder="30"></div>
+    <div class="field"><label>性別</label><div class="seg" id="ob-sex"><button data-s="m" class="on">男性</button><button data-s="f">女性</button></div></div>
+  </div>
+  <div class="field"><label>いまの目標は？</label>
+    <div class="seg modes" id="ob-mode"><button data-m="bulk">増量</button><button data-m="cut" class="on">減量</button><button data-m="keep">維持</button></div></div>
+  <div class="field"><label>トレーニング頻度</label>
+    <div class="seg" id="ob-act"><button data-a="1.375">週2-3</button><button data-a="1.55" class="on">週4-5</button><button data-a="1.725">ほぼ毎日</button></div></div>
+  <div class="target-preview"><div class="t">▼ お前の1日の目標（自動計算）</div>
+    <div class="grid">
+      <div class="g"><div class="v" style="color:var(--p)" id="ob-p">–</div><div class="k">P たんぱく</div></div>
+      <div class="g"><div class="v" style="color:var(--f)" id="ob-f">–</div><div class="k">F 脂質</div></div>
+      <div class="g"><div class="v" style="color:var(--c)" id="ob-c">–</div><div class="k">C 炭水化物</div></div>
+      <div class="g"><div class="v" id="ob-k">–</div><div class="k">kcal</div></div>
+    </div></div>
+  <button class="btn" id="ob-go">相棒とはじめる</button>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <div class="top">
+    <div class="logo">トレ飯<b>相棒</b></div>
+    <div class="top-r"><button class="gear" onclick="go('set')">⚙️</button>
+      <button class="mode-pill" id="modePill" onclick="cycleMode()">減量期</button></div>
+  </div>
+  <div id="v-home" class="view">
+    <div class="buddy" onclick="openChat()">
+      <div class="face" id="b-face">💪</div>
+      <div class="bubble"><div class="bname"><span id="b-name">相棒・ゲイン</span><span class="chat">💬 相談する</span></div>
+        <div class="btext" id="b-text">…</div></div>
+    </div>
+    <div id="fill-slot"></div>
+    <div class="rings" id="rings"></div>
+    <div class="kcal"><div class="row"><div class="big"><span id="k-now">0</span><small> / <span id="k-goal">0</span> kcal</small></div>
+      <div class="goal" id="k-left">あと –</div></div><div class="track"><i id="k-bar" style="width:0%"></i></div></div>
+    <div class="sec"><h3>今日の食事</h3><a id="today-count"></a></div>
+    <div id="today-list"></div>
+  </div>
+  <div id="v-hist" class="view hidden">
+    <div class="stat-row">
+      <div class="stat"><div class="k">現在体重</div><div class="v"><span id="w-now">–</span><small>kg</small></div><div class="d" id="w-diff"></div></div>
+      <div class="stat"><div class="k">P達成 連続</div><div class="v" id="p-streak">–</div><div class="d" style="color:var(--sub)">日</div></div>
+    </div>
+    <div class="chart"><h3>体重の推移</h3><svg id="wchart" width="100%" height="120" viewBox="0 0 320 120" preserveAspectRatio="none"></svg></div>
+    <button class="btn sub" onclick="openWeight()">＋ 今日の体重を記録</button>
+    <div class="sec"><h3>これまでの記録</h3></div><div id="hist-list"></div>
+  </div>
+  <div id="v-set" class="view hidden">
+    <div class="buddy" style="margin-top:8px;cursor:default"><div class="face">⚙️</div>
+      <div class="bubble"><div class="bname"><span>設定</span></div><div class="btext">体や目標が変わったら、ここで俺に教えてくれ。</div></div></div>
+    <div class="field"><label>相棒の名前</label><input class="input" id="set-name" placeholder="ゲイン"></div>
+    <div class="two">
+      <div class="field"><label>体重 (kg)</label><input class="input s" id="set-w" type="number" inputmode="decimal"></div>
+      <div class="field"><label>身長 (cm)</label><input class="input s" id="set-h" type="number" inputmode="decimal"></div></div>
+    <div class="two">
+      <div class="field"><label>年齢</label><input class="input s" id="set-age" type="number" inputmode="numeric"></div>
+      <div class="field"><label>性別</label><div class="seg" id="set-sex"><button data-s="m">男性</button><button data-s="f">女性</button></div></div></div>
+    <div class="field"><label>目標</label><div class="seg modes" id="set-mode"><button data-m="bulk">増量</button><button data-m="cut">減量</button><button data-m="keep">維持</button></div></div>
+    <div class="field"><label>トレーニング頻度</label><div class="seg" id="set-act"><button data-a="1.375">週2-3</button><button data-a="1.55">週4-5</button><button data-a="1.725">ほぼ毎日</button></div></div>
+    <div class="target-preview"><div class="t">▼ 更新後の目標</div>
+      <div class="grid">
+        <div class="g"><div class="v" style="color:var(--p)" id="set-p">–</div><div class="k">P</div></div>
+        <div class="g"><div class="v" style="color:var(--f)" id="set-f">–</div><div class="k">F</div></div>
+        <div class="g"><div class="v" style="color:var(--c)" id="set-c">–</div><div class="k">C</div></div>
+        <div class="g"><div class="v" id="set-k">–</div><div class="k">kcal</div></div>
+      </div></div>
+    <button class="btn" onclick="saveSettings()">保存する</button>
+    <button class="btn sub" style="margin-top:10px" onclick="resetAll()">データをリセット</button>
+    <p class="note" id="apinote">…</p>
+  </div>
+  <div class="nav">
+    <button id="n-home" class="on" onclick="go('home')"><span class="ic">🏠</span>ホーム</button>
+    <button onclick="openAdd()"><span class="fab">＋</span></button>
+    <button id="n-hist" onclick="go('hist')"><span class="ic">📈</span>記録</button>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const API='';                          // 同一オリジン
+const KEY='torimeshi_real_v1';
+const DB={
+  '鶏むね肉(皮なし)':[27,2,0,'🍗'],'ささみ':[23,1,0,'🍗'],'サラダチキン':[24,2,1,'🍗'],'牛赤身ステーキ':[26,8,0,'🥩'],
+  '豚ロース':[22,14,0,'🥩'],'サーモン':[22,13,0,'🐟'],'まぐろ赤身':[26,1,0,'🐟'],'ツナ缶(水煮)':[16,1,0,'🐟'],
+  'ゆで卵':[7,5,0,'🥚'],'ギリシャヨーグルト':[10,0,4,'🍶'],'プロテイン(1杯)':[24,2,3,'🥤'],'納豆':[8,5,6,'🫘'],
+  '豆腐(150g)':[10,6,3,'🧊'],'白米(150g)':[4,1,55,'🍚'],'玄米(150g)':[4,1,51,'🍚'],'オートミール(40g)':[6,3,24,'🥣'],
+  'そば':[10,2,50,'🍜'],'さつまいも(150g)':[2,0,45,'🍠'],'バナナ':[1,0,23,'🍌'],'ブロッコリー':[4,1,5,'🥦'],
+  'アボカド':[2,15,2,'🥑'],'アーモンド(25g)':[6,14,5,'🥜'],'牛丼(並)':[20,20,90,'🍚'],'ラーメン':[20,15,70,'🍜'],
+  'カレーライス':[15,20,95,'🍛'],'寿司(8貫)':[24,6,72,'🍣'],'ハンバーガー':[14,14,30,'🍔']
+};
+const QUICK=['鶏むね肉(皮なし)','ゆで卵','白米(150g)','プロテイン(1杯)','サラダチキン','納豆','ギリシャヨーグルト','オートミール(40g)','バナナ','牛丼(並)'];
+const PORTIONS={'少なめ':0.6,'ふつう':1,'多め':1.5,'爆盛り':2};
+let S=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||null}catch(e){return null}}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function todayKey(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function fmtDate(k){const[y,m,d]=k.split('-');return m+'/'+d}
+function bname(){return (S&&S.buddy)||'ゲイン'}
+function v(id){return document.getElementById(id).value}
+
+async function api(path,body){
+  const r=await fetch(API+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j=await r.json().catch(()=>({error:'bad'}));
+  if(!r.ok) throw Object.assign(new Error(j.error||'err'),{data:j});
+  return j;
+}
+
+function calcTargets(o){
+  const w=o.w,h=o.h||172,age=o.age||30;
+  let bmr=10*w+6.25*h-5*age+(o.sex==='f'?-161:5);
+  let tdee=bmr*(o.act||1.55),kcal,pk,fk;
+  if(o.mode==='bulk'){kcal=tdee+300;pk=2.0;fk=1.0;}
+  else if(o.mode==='cut'){kcal=tdee-400;pk=2.4;fk=0.8;}
+  else{kcal=tdee;pk=2.0;fk=0.9;}
+  const P=Math.round(w*pk),F=Math.round(w*fk),C=Math.max(0,Math.round((kcal-P*4-F*9)/4));
+  return{kcal:Math.round(kcal),P,F,C};
+}
+const MODE_JP={bulk:'増量期',cut:'減量期',keep:'維持期'},MODE_CLS={bulk:'bulk',cut:'cut',keep:'keep'};
+
+/* onboarding */
+let obMode='cut',obAct=1.55,obSex='m';
+function readOb(){return{w:parseFloat(v('ob-w')),h:parseFloat(v('ob-h')),age:parseInt(v('ob-age')),sex:obSex,mode:obMode,act:obAct}}
+function obPreview(){const o=readOb();
+  if(!o.w){['p','f','c','k'].forEach(x=>document.getElementById('ob-'+x).textContent='–');return}
+  const t=calcTargets(o);document.getElementById('ob-p').textContent=t.P+'g';document.getElementById('ob-f').textContent=t.F+'g';
+  document.getElementById('ob-c').textContent=t.C+'g';document.getElementById('ob-k').textContent=t.kcal;}
+function segify(id,cb,attr){const box=document.getElementById(id);
+  box.querySelectorAll('button').forEach(b=>b.onclick=()=>{box.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cb(b.dataset[attr]);});}
+function initOnboard(){
+  document.querySelectorAll('#onboard .o').forEach(el=>el.addEventListener('input',obPreview));
+  segify('ob-sex',s=>{obSex=s;obPreview()},'s');segify('ob-mode',m=>{obMode=m;obPreview()},'m');segify('ob-act',a=>{obAct=parseFloat(a);obPreview()},'a');
+  document.getElementById('ob-go').onclick=()=>{const o=readOb();
+    if(!o.w||!o.h){toast('体重と身長を入れてくれ💪');return}
+    S={...o,buddy:'ゲイン',days:{},weights:[{k:todayKey(),w:o.w}]};save();
+    document.getElementById('onboard').classList.add('hidden');document.getElementById('app').classList.remove('hidden');render();
+    setTimeout(()=>celebrate('相棒契約、成立だ🤝','これからよろしくな。まず一食、記録してみよう。'),300);};
+}
+
+/* home */
+function dayTotals(){const d=S.days[todayKey()]||{meals:[]};
+  return d.meals.reduce((a,m)=>({P:a.P+m.P,F:a.F+m.F,C:a.C+m.C,kcal:a.kcal+m.kcal}),{P:0,F:0,C:0,kcal:0})}
+function ring(label,cur,goal,color){const r=26,circ=2*Math.PI*r,pct=Math.min(1,goal?cur/goal:0),off=circ*(1-pct),over=cur>=goal&&goal>0;
+  return `<div class="ring"><svg width="66" height="66" style="transform:rotate(-90deg)">
+    <circle cx="33" cy="33" r="${r}" stroke="#0a0c10" stroke-width="7" fill="none"/>
+    <circle cx="33" cy="33" r="${r}" stroke="${color}" stroke-width="7" fill="none" stroke-dasharray="${circ}" stroke-dashoffset="${off}" stroke-linecap="round" style="transition:stroke-dashoffset .6s"/></svg>
+    <div class="label">${label}</div><div class="num" style="color:${over?color:'var(--ink)'}">${Math.round(cur)}<small>/${goal}g</small></div>
+    <div class="rem">${over?'達成🔥':'あと'+Math.max(0,Math.round(goal-cur))+'g'}</div></div>`;}
+function render(){
+  const t=S.targets=calcTargets(S),cur=dayTotals();
+  const pill=document.getElementById('modePill');pill.textContent=MODE_JP[S.mode];pill.className='mode-pill '+MODE_CLS[S.mode];
+  document.getElementById('rings').innerHTML=ring('P',cur.P,t.P,'var(--p)')+ring('F',cur.F,t.F,'var(--f)')+ring('C',cur.C,t.C,'var(--c)');
+  document.getElementById('k-now').textContent=Math.round(cur.kcal);document.getElementById('k-goal').textContent=t.kcal;
+  const left=t.kcal-cur.kcal;document.getElementById('k-left').textContent=left>=0?('あと '+left+' kcal'):('+'+(-left)+' オーバー');
+  document.getElementById('k-bar').style.width=Math.min(100,cur.kcal/t.kcal*100)+'%';
+  document.getElementById('b-name').textContent='相棒・'+bname();
+  buddyTalk(cur,t);proteinFill(cur,t);
+  const meals=(S.days[todayKey()]||{meals:[]}).meals;
+  document.getElementById('today-count').textContent=meals.length?meals.length+'食':'';
+  document.getElementById('today-list').innerHTML=meals.length?meals.map((m,i)=>mealCard(m,i)).join(''):'<div class="empty">まだ記録なし。＋から今日の一食目をどうぞ🍚</div>';
+}
+function mealCard(m,i){return `<div class="meal"><div class="thumb">${m.img?`<img src="${m.img}">`:m.emoji||'🍽️'}</div>
+  <div class="mid"><div class="mname">${m.name}</div><div class="mmac"><b>P${Math.round(m.P)}</b> · F${Math.round(m.F)} · C${Math.round(m.C)}</div></div>
+  <div class="kc">${Math.round(m.kcal)}<br><span style="font-size:10px;color:var(--dim)">kcal</span></div>
+  <button class="del" onclick="delMeal(${i})">×</button></div>`}
+function delMeal(i){S.days[todayKey()].meals.splice(i,1);save();render()}
+
+function proteinFill(cur,t){const slot=document.getElementById('fill-slot'),left=t.P-cur.P;
+  if(left<=15){slot.innerHTML='';return}
+  const opts=[['🥤','プロテイン1杯',24],['🍗','鶏むね100g',22],['🍗','サラダチキン1個',24],['🥚','ゆで卵3個',21],['🍶','ギリシャヨーグルト2個',20],['🐟','ツナ缶2個',32]];
+  const p=opts[Math.floor(left/12)%opts.length];
+  slot.innerHTML=`<div class="fill"><span class="ic">${p[0]}</span><div class="tx">Pあと<b>${Math.round(left)}g</b>。<b>${p[1]}</b>で一気に詰めれるぞ。</div><button onclick="quickLog('${p[1]}',${p[2]})">＋記録</button></div>`;}
+function quickLog(name,P){const tk=todayKey();if(!S.days[tk])S.days[tk]={meals:[]};
+  const before=dayTotals().P;S.days[tk].meals.push({name,emoji:'💪',img:null,P,F:2,C:2,kcal:P*4+2*9+2*4});save();
+  const after=dayTotals().P,t=S.targets;render();
+  if(before<t.P&&after>=t.P)celebrate('P目標クリア！🔥','今日のタンパク質'+t.P+'g、達成だ相棒。');else toast(name+' を記録したよ💪');}
+
+/* buddy (local default + optional AI refresh via chat) */
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function buddyTalk(cur,t){
+  const face=document.getElementById('b-face'),txt=document.getElementById('b-text');
+  const pLeft=t.P-cur.P,kLeft=t.kcal-cur.kcal,hour=new Date().getHours();
+  const meals=(S.days[todayKey()]||{meals:[]}).meals.length,streak=pStreak();let f='💪',m='';
+  if(meals===0){ if(hour<11){f='😎';m=pick(['おはよう相棒。今日も一発目、タンパク質から攻めてこ。','よし朝だ。まず卵かプロテインで体を起こそう。']);}
+    else{f='😤';m='まだ何も食ってないな？まずタンパク源から入れてこう。';}}
+  else if(cur.P>=t.P){f='🔥';m=streak>=2?`P${streak}日連続クリア。お前もう本物だわ。`:`P${Math.round(cur.P)}g、目標クリアだ！筋肉が喜んでる。`;}
+  else if(pLeft<=25){f='😤';m=`Pあと${Math.round(pLeft)}g！下の提案で埋めちまえ。`;}
+  else if(S.mode==='cut'&&kLeft<0){f='🤔';m=`カロリーは${-kLeft}オーバー。減量期でも罪悪感はいらない。Pだけは死守な。`;}
+  else if(S.mode==='bulk'&&kLeft>600){f='🍚';m=`増量期にしては食えてないぞ。あと${kLeft}kcal、炭水化物で埋めてけ。`;}
+  else{f='💪';m=`いいペース。残りP${Math.round(pLeft)}g、あと${kLeft}kcal。焦らず一食ずつ。`;}
+  face.textContent=f;txt.textContent=m;
+}
+function pStreak(){const t=S.targets||calcTargets(S);let s=0;const d=new Date();
+  for(let i=0;i<60;i++){const k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(),day=S.days[k];
+    if(i===0&&(!day||!day.meals.length)){d.setDate(d.getDate()-1);continue;}
+    if(day&&day.meals.reduce((a,m)=>a+m.P,0)>=t.P)s++;else break;d.setDate(d.getDate()-1);}return s;}
+function coachCtx(msg){const t=S.targets||calcTargets(S),d=dayTotals();
+  return{buddy:bname(),mode:S.mode,targets:t,today:{P:Math.round(d.P),F:Math.round(d.F),C:Math.round(d.C),kcal:Math.round(d.kcal)},
+    streak:pStreak(),meals:(S.days[todayKey()]||{meals:[]}).meals.map(m=>m.name),history:S.chat||[],message:msg||''};}
+
+/* CHAT with buddy (real AI) */
+function openChat(){
+  const el=document.createElement('div');el.className='sheet';el.id='sheet';
+  const log=(S.chat||[]).map(m=>`<div class="msg ${m.role==='buddy'?'b':'u'}">${esc(m.text)}</div>`).join('')
+    ||`<div class="msg b">よお。今日の調子どうだ？飯のこと、なんでも聞いてくれ。</div>`;
+  el.innerHTML=`<div class="panel"><div class="grip"></div>
+    <h2>相棒・${bname()} 💬</h2>
+    <div class="chatlog" id="chatlog">${log}</div>
+    <div class="chatbar"><input class="input" id="chatin" placeholder="例：減量きつい / あと何食べれば？"><button onclick="sendChat()">送信</button></div>
+    <button class="btn sub" style="margin-top:12px" onclick="closeSheet()">閉じる</button></div>`;
+  document.body.appendChild(el);el.onclick=e=>{if(e.target===el)closeSheet()};
+  const inp=document.getElementById('chatin');inp.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
+  document.getElementById('chatlog').scrollTop=9e9;
+}
+function esc(s){return (s+'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+async function sendChat(){
+  const inp=document.getElementById('chatin'),log=document.getElementById('chatlog');
+  const msg=inp.value.trim();if(!msg)return;inp.value='';
+  S.chat=S.chat||[];S.chat.push({role:'user',text:msg});save();
+  log.insertAdjacentHTML('beforeend',`<div class="msg u">${esc(msg)}</div><div class="msg b typing" id="typing">…考え中</div>`);
+  log.scrollTop=9e9;
+  try{const r=await api('/api/coach',coachCtx(msg));
+    document.getElementById('typing').remove();
+    S.chat.push({role:'buddy',text:r.reply});save();
+    log.insertAdjacentHTML('beforeend',`<div class="msg b">${esc(r.reply)}</div>`);log.scrollTop=9e9;
+    document.getElementById('b-text').textContent=r.reply;
+  }catch(e){const tp=document.getElementById('typing');if(tp)tp.remove();
+    log.insertAdjacentHTML('beforeend',`<div class="msg b">${e.data&&e.data.error==='no_api_key'?'（サーバにAPIキー未設定。README参照で設定してくれ）':'（通信エラー。サーバ動いてる？）'}</div>`);}
+}
+
+/* ADD sheet */
+let draft=null;
+function openAdd(){
+  const el=document.createElement('div');el.className='sheet';el.id='sheet';
+  el.innerHTML=`<div class="panel"><div class="grip"></div><h2>何食べた？📸</h2>
+    <div class="photo-drop" id="drop"><div id="drop-inner"><div class="ic">📷</div><div class="t">写真を撮る / 選ぶ</div><div class="s">AI(Claude)が料理とPFCを推定</div></div>
+      <input type="file" accept="image/*" id="file" capture="environment"></div>
+    <input class="searchbar" id="search" placeholder="🔍 手入力で検索（例：鶏、白米、プロテイン）">
+    <div class="foodgrid" id="foodgrid"></div><div id="result-area"></div><div style="height:8px"></div>
+    <button class="btn sub" onclick="closeSheet()">閉じる</button></div>`;
+  document.body.appendChild(el);el.onclick=e=>{if(e.target===el)closeSheet()};
+  document.getElementById('file').addEventListener('change',onPhoto);
+  document.getElementById('search').addEventListener('input',e=>renderFoods(e.target.value));renderFoods('');
+}
+function renderFoods(q){const g=document.getElementById('foodgrid');
+  const names=q?Object.keys(DB).filter(n=>n.includes(q)):QUICK;
+  g.innerHTML=names.map(n=>`<button onclick="chooseDB('${n}')">${DB[n][3]} ${n}</button>`).join('')||'<div class="empty" style="padding:14px">写真か手入力でどうぞ</div>';}
+function closeSheet(){const s=document.getElementById('sheet');if(s)s.remove();draft=null}
+async function onPhoto(e){
+  const file=e.target.files[0];if(!file)return;
+  const rd=new FileReader();
+  rd.onload=async ev=>{const img=ev.target.result;
+    document.getElementById('drop-inner').innerHTML=`<img src="${img}">`;
+    const area=document.getElementById('result-area');
+    area.innerHTML=`<div class="analyzing"><div class="spin"></div>Claudeが解析中…料理を見てる👀</div>`;
+    try{const r=await api('/api/analyze',{image:img,mode:S.mode});
+      draft={name:r.name,emoji:'🍽️',img,portion:1,P:r.P,F:r.F,C:r.C};
+      renderResult('🤖 AI推定：'+(r.note||'たぶんこれ。違ったら下で直して'));
+    }catch(err){ // フォールバック：ローカル推定
+      const keys=Object.keys(DB),g=keys[Math.floor((file.size||5000)/97)%keys.length],b=DB[g];
+      draft={name:g,emoji:b[3],img,portion:1,P:b[0],F:b[1],C:b[2]};
+      renderResult(err.data&&err.data.error==='no_api_key'?'⚠️ APIキー未設定→仮の推定。下で直して':'⚠️ オフライン推定。下で直して');
+    }};
+  rd.readAsDataURL(file);
+}
+function chooseDB(name){const b=DB[name]||[20,10,40,'🍽️'];draft={name,emoji:b[3],img:null,portion:1,P:b[0],F:b[1],C:b[2]};
+  renderResult('量を選んで調整してね');document.getElementById('result-area').scrollIntoView({behavior:'smooth',block:'nearest'});}
+function renderResult(conf){
+  const area=document.getElementById('result-area');
+  const P=Math.round(draft.P*draft.portion),F=Math.round(draft.F*draft.portion),C=Math.round(draft.C*draft.portion),kcal=P*4+F*9+C*4;
+  area.innerHTML=`<div class="result"><div class="rname">${draft.emoji} ${draft.name}</div>
+    <div class="conf">${conf} → <b>${kcal}kcal</b></div>
+    <div class="portion" id="portion">${Object.keys(PORTIONS).map(p=>`<button data-p="${PORTIONS[p]}" class="${PORTIONS[p]===draft.portion?'on':''}">${p}</button>`).join('')}</div>
+    ${slider('P','たんぱく質',P,'pmark','var(--p)')}${slider('F','脂質',F,'fmark','var(--f)')}${slider('C','炭水化物',C,'cmark','var(--c)')}
+    <button class="btn" onclick="commitMeal()">この内容で記録する ✓</button></div>`;
+  document.querySelectorAll('#portion button').forEach(b=>b.onclick=()=>{draft.portion=parseFloat(b.dataset.p);renderResult(conf)});
+  ['P','F','C'].forEach(k=>{const s=document.getElementById('sl-'+k);
+    s.addEventListener('input',()=>{draft[k]=parseFloat(s.value)/draft.portion;document.getElementById('slv-'+k).textContent=Math.round(s.value)+'g';});});
+}
+function slider(k,label,val,cls,color){const max=Math.max(80,val*2);
+  return `<div class="slider-row"><div class="sl-top"><span class="k">${label}</span><span id="slv-${k}" style="color:${color}">${val}g</span></div>
+    <input type="range" id="sl-${k}" class="${cls}" min="0" max="${max}" value="${val}" step="1"></div>`}
+function commitMeal(){const P=Math.round(draft.P*draft.portion),F=Math.round(draft.F*draft.portion),C=Math.round(draft.C*draft.portion);
+  const meal={name:draft.name,emoji:draft.emoji,img:draft.img,P,F,C,kcal:P*4+F*9+C*4};
+  const tk=todayKey();if(!S.days[tk])S.days[tk]={meals:[]};const before=dayTotals().P,t=S.targets;
+  S.days[tk].meals.push(meal);save();const after=dayTotals().P;closeSheet();render();
+  if(before<t.P&&after>=t.P)celebrate('P目標クリア！🔥','今日のタンパク質'+t.P+'g、達成だ相棒。');else toast(meal.name+' を記録したよ💪');}
+
+/* toast/celebrate */
+let toastT;
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2400)}
+function celebrate(h,p){const el=document.createElement('div');el.className='celebrate';
+  el.innerHTML=`<div class="big">🏆</div><div class="h">${h}</div><div class="p">${p}</div>`;document.body.appendChild(el);
+  const cols=['#ff4d5e','#ffb020','#3aa0ff','#22c55e','#fff'];
+  for(let i=0;i<44;i++){const c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'%';c.style.background=cols[i%cols.length];
+    c.style.animation=`fall ${1+Math.random()*1.2}s linear ${Math.random()*.4}s forwards`;document.body.appendChild(c);setTimeout(()=>c.remove(),2700);}
+  el.onclick=()=>el.remove();setTimeout(()=>{if(el.parentNode)el.remove()},2600);}
+const st=document.createElement('style');st.textContent='@keyframes fall{to{transform:translateY(108dvh) rotate(560deg);opacity:.2}}';document.head.appendChild(st);
+
+/* nav */
+function go(view){['home','hist','set'].forEach(x=>{document.getElementById('v-'+x).classList.toggle('hidden',x!==view);
+  const n=document.getElementById('n-'+x);if(n)n.classList.toggle('on',x===view);});
+  if(view==='hist')renderHist();if(view==='set')fillSettings();}
+
+/* history */
+function renderHist(){const ws=S.weights||[],now=ws.length?ws[ws.length-1].w:S.w,first=ws.length?ws[0].w:S.w;
+  document.getElementById('w-now').textContent=now;const diff=(now-first).toFixed(1),wd=document.getElementById('w-diff');
+  wd.textContent=(diff>0?'▲ +':diff<0?'▼ ':'– ')+diff+'kg';wd.className='d '+(diff>0?'up':'down');
+  document.getElementById('p-streak').textContent=pStreak();drawChart(ws);
+  const hl=document.getElementById('hist-list'),t=S.targets||calcTargets(S),days=Object.keys(S.days).sort().reverse();
+  hl.innerHTML=days.length?days.map(k=>{const tot=S.days[k].meals.reduce((a,m)=>({P:a.P+m.P,F:a.F+m.F,C:a.C+m.C,kcal:a.kcal+m.kcal}),{P:0,F:0,C:0,kcal:0});
+    const hit=tot.P>=t.P;
+    return `<div class="daycard"><div class="dh"><span class="dk">${fmtDate(k)}・${S.days[k].meals.length}食</span>
+      <span style="color:${hit?'var(--ok)':'var(--dim)'}">${hit?'P達成 ✓':'P未達'} / ${Math.round(tot.kcal)}kcal</span></div>
+      <div class="macs"><span style="color:var(--p)">P<b>${Math.round(tot.P)}</b>g</span><span style="color:var(--f)">F<b>${Math.round(tot.F)}</b>g</span><span style="color:var(--c)">C<b>${Math.round(tot.C)}</b>g</span></div></div>`;}).join(''):'<div class="empty">記録が貯まるとここに出るよ</div>';}
+function drawChart(ws){const svg=document.getElementById('wchart');
+  if(ws.length<2){svg.innerHTML='<text x="160" y="62" fill="#5a6473" font-size="11" text-anchor="middle">体重を2回以上記録すると推移が出るよ</text>';return}
+  const vals=ws.map(x=>x.w),min=Math.min(...vals)-.5,max=Math.max(...vals)+.5,W=320,H=120,pad=12;
+  const pts=ws.map((x,i)=>[pad+i/(ws.length-1)*(W-pad*2),H-pad-(x.w-min)/(max-min||1)*(H-pad*2)]);
+  const line=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const area=line+` L${pts[pts.length-1][0]} ${H} L${pts[0][0]} ${H} Z`;
+  svg.innerHTML=`<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff4d5e" stop-opacity=".35"/><stop offset="1" stop-color="#ff4d5e" stop-opacity="0"/></linearGradient></defs>
+    <path d="${area}" fill="url(#g)"/><path d="${line}" fill="none" stroke="#ff4d5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    ${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.2" fill="#0c0e12" stroke="#ff4d5e" stroke-width="2"/>`).join('')}`;}
+function openWeight(){const cur=(S.weights&&S.weights.slice(-1)[0]&&S.weights.slice(-1)[0].w)||S.w;
+  const val=prompt('今日の体重（kg）は？',cur);if(!val)return;const w=parseFloat(val);if(!w)return;
+  const tk=todayKey();S.weights=S.weights||[];const ex=S.weights.find(x=>x.k===tk);if(ex)ex.w=w;else S.weights.push({k:tk,w});
+  S.w=w;save();renderHist();toast('体重を記録したよ📈');}
+
+/* settings */
+let setMode,setAct,setSex;
+function fillSettings(){setMode=S.mode;setAct=S.act;setSex=S.sex||'m';
+  document.getElementById('set-name').value=bname();document.getElementById('set-w').value=S.w;document.getElementById('set-h').value=S.h||'';document.getElementById('set-age').value=S.age||'';
+  markSeg('set-sex','s',setSex);markSeg('set-mode','m',S.mode);markSeg('set-act','a',String(S.act));
+  document.querySelectorAll('#v-set .s').forEach(el=>el.oninput=setPreview);
+  segify('set-sex',s=>{setSex=s;setPreview()},'s');segify('set-mode',m=>{setMode=m;setPreview()},'m');segify('set-act',a=>{setAct=parseFloat(a);setPreview()},'a');
+  setPreview();apiNote();}
+function markSeg(id,attr,val){document.getElementById(id).querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset[attr]===val))}
+function setPreview(){const o={w:parseFloat(v('set-w'))||S.w,h:parseFloat(v('set-h'))||S.h,age:parseInt(v('set-age'))||S.age,sex:setSex,mode:setMode,act:setAct};
+  const t=calcTargets(o);document.getElementById('set-p').textContent=t.P+'g';document.getElementById('set-f').textContent=t.F+'g';
+  document.getElementById('set-c').textContent=t.C+'g';document.getElementById('set-k').textContent=t.kcal;}
+function saveSettings(){S.buddy=document.getElementById('set-name').value.trim()||'ゲイン';
+  S.w=parseFloat(v('set-w'))||S.w;S.h=parseFloat(v('set-h'))||S.h;S.age=parseInt(v('set-age'))||S.age;S.sex=setSex;S.mode=setMode;S.act=setAct;save();go('home');render();toast('目標を更新したよ💪');}
+function cycleMode(){const o=['cut','keep','bulk'];S.mode=o[(o.indexOf(S.mode)+1)%3];save();render();toast(MODE_JP[S.mode]+'に切り替え')}
+function resetAll(){if(confirm('すべてのデータを消す？')){localStorage.removeItem(KEY);location.reload()}}
+async function apiNote(){const el=document.getElementById('apinote');
+  try{const r=await fetch(API+'/api/health').then(x=>x.json());
+    el.innerHTML=r.has_key?`✅ AI接続OK（${r.model}）— 写真解析・相棒会話は本物のAIで動作中`:'⚠️ サーバにAPIキー未設定。写真解析と相棒会話はREADME手順でキーを設定すると本物になります（今は仮）';
+  }catch(e){el.textContent='サーバ未接続（python3 server.py で起動）';}}
+
+/* boot */
+initOnboard();
+if(S&&S.w){document.getElementById('app').classList.remove('hidden');render();}
+else{document.getElementById('onboard').classList.remove('hidden');}
+</script>
