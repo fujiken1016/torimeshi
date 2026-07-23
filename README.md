@@ -1,68 +1,75 @@
-# トレ飯相棒（ローカル本番版）
+# トレ飯相棒
 
 トレーニー向け食事記録アプリ。写真を撮ると **Claude Vision** が料理とPFC（タンパク質・脂質・炭水化物）を推定し、相棒AI「ゲイン」が残りタンパク質の埋め方まで一緒に考えてくれる。相棒とはチャットで会話もできる。
 
-Artifact版（デモ推定・キー不要）: https://claude.ai/code/artifact/51d25693-06fc-44dd-921c-65ebc113aeea
-→ こちらの **ローカル版は写真解析と会話が「本物のAI」** で動く。
+- **写真→本物のPFC解析**（Claude Vision）
+- **体重×目標でPFC自動計算**（BMR / Mifflin-St Jeor）
+- **相棒AIと会話**（今日の数値を踏まえて相談に乗る）
+- **残りタンパク質の埋め方を提案**・達成演出・体重推移・日別履歴
+- データはブラウザ内（localStorage）保存。サーバはAI中継のみ
+
+構成: `index.html`（フロント） / `api/`（Vercelサーバーレス関数：`analyze`=写真解析, `coach`=相棒会話, `health`） / `server.py`（ローカル開発用）。モデル `claude-opus-4-8`。
 
 ---
 
-## 動かすのに必要なもの
-
-1. **Python 3**（Macには標準で入ってる。`python3 --version` で確認）
-2. **anthropic ライブラリ**（未導入なら `pip3 install anthropic`）
-3. **Anthropic APIキー** … https://console.anthropic.com → API Keys で発行。従量課金（写真1枚の解析＝数円程度）
-
----
-
-## 起動手順
+## A. まずローカルで動かす（自分のMacだけ・確認用）
 
 ```bash
 cd ~/Desktop/claude/torimeshi
-
-# 1. APIキーを環境変数に（sk-ant-... を自分のキーに置き換える）
-export ANTHROPIC_API_KEY="sk-ant-xxxxxxxx"
-
-# 2. サーバ起動
-python3 server.py
+pip3 install anthropic                 # 未導入なら
+export ANTHROPIC_API_KEY="sk-ant-..."  # console.anthropic.com で発行
+python3 server.py                      # → http://localhost:8787
 ```
 
-起動したら **ブラウザで http://localhost:8787 を開く**。
+---
 
-スマホからも使いたい場合：Macと同じWi-Fiのスマホで `http://<MacのローカルIP>:8787`（IPは「システム設定→ネットワーク」で確認）。
+## B. スマホからいつでも使う（Vercelに公開）★本番
 
-> APIキーを設定せずに起動しても、アプリ自体は開けます。ただし写真解析は「仮の推定」、相棒会話は「キー未設定」表示になります。キーを設定して起動し直すと本物のAIに切り替わります。
+**Node不要・ほぼ画面クリックだけ**。所要10〜15分。無料枠(Vercel Hobby / 個人利用)で足りる。
+※アカウント作成・ログイン・APIキー入力は「あなたの操作」です（こちらでは代行できません）。
+
+### 1. Anthropic APIキーを用意
+https://console.anthropic.com → API Keys → 発行（`sk-ant-...`）。従量課金（写真1枚の解析≒数円）。
+
+### 2. コードをGitHubに置く
+ローカルのgitリポジトリは初期化＆コミット済み。GitHubに上げるだけ：
+
+1. https://github.com でアカウント作成（無料）
+2. 新規リポジトリ作成（例 `torimeshi`、Private可、READMEなどは追加しない）
+3. ターミナルで push（`<自分>` を自分のユーザー名に）：
+   ```bash
+   cd ~/Desktop/claude/torimeshi
+   git remote add origin https://github.com/<自分>/torimeshi.git
+   git branch -M main
+   git push -u origin main
+   ```
+   初回pushでGitHubの認証を求められる → ブラウザ or アクセストークンで自分でログイン。
+
+### 3. Vercelにデプロイ
+1. https://vercel.com → 「Continue with GitHub」でアカウント作成（無料 Hobby）
+2. **Add New → Project** → さっきの `torimeshi` リポジトリを **Import**
+3. デプロイ設定画面の **Environment Variables** に1つ追加：
+   - Name: `ANTHROPIC_API_KEY`　Value: `sk-ant-...`（自分のキー）
+4. **Deploy** を押す → 数十秒で `https://torimeshi-xxxx.vercel.app` が発行される
+
+### 4. スマホでアプリ化
+発行URLをスマホのブラウザで開く → 共有メニュー → **「ホーム画面に追加」**。アプリのアイコンから起動できる。
+
+> 以後、コードを直して `git push` するだけで自動で再デプロイされる。
 
 ---
 
-## 何ができる
+## 詰まりやすいポイント
 
-- **写真→本物のPFC解析**：撮った料理をClaudeが見て、料理名とP/F/Cを推定。推定はスライダーで即修正可能
-- **体重×目標でPFC自動計算**：身長/年齢/性別からBMR（Mifflin-St Jeor式）→ 増量/減量/維持でマクロ自動設定
-- **相棒AI「ゲイン」と会話**：ホームの相棒カードをタップ→今日の数値を踏まえて相談に乗ってくれる（減量きつい、あと何食べれば等）
-- **残りタンパク質の埋め方を提案**：ワンタップ記録
-- **達成演出・体重推移グラフ・日別履歴**
-- データはブラウザ内（localStorage）に保存。サーバはAIへの中継のみ
+- **写真解析/会話が「未設定」と出る** → Vercelの Settings → Environment Variables に `ANTHROPIC_API_KEY` があるか確認。追加/変更後は Deployments から **Redeploy**。
+- **解析が遅い/タイムアウト** → `vercel.json` の `maxDuration` を下げる、または環境変数 `TORIMESHI_MODEL=claude-sonnet-5` を足すと速く安くなる。
+- **`maxDuration` でデプロイが弾かれる** → `vercel.json` の該当行を消してデプロイ（デフォルトで動く）。
+- **push で認証エラー** → GitHubは今はパスワード不可。Personal Access Token（Settings→Developer settings→Tokens）を作ってパスワード欄に貼る。
 
 ---
 
-## 構成
+## この先（本物のサービスにするなら）
 
-| ファイル | 役割 |
-|---|---|
-| `server.py` | Python標準ライブラリのバックエンド。`/api/analyze`（写真→PFC）と `/api/coach`（相棒会話）でClaudeを呼ぶ |
-| `index.html` | フロント（そのままスマホ表示前提のUI） |
-
-モデルは `claude-opus-4-8`。速度優先なら `server.py` の `MODEL` を `claude-sonnet-5` に。
-
----
-
-## 次の一手（スマホアプリとして毎日使うには）
-
-このローカル版は「自分のMacを起動している間だけ」動く。いつでもスマホから使う本番にするには：
-
-- **Vercel / Cloudflare Workers** 等に `server.py` 相当のAPIをデプロイ（キーはサーバ側の環境変数に隠す）
-- フロントを常時公開URLで配信 → ホーム画面に追加でアプリ化
-- ユーザーごとのデータ保存（今はブラウザ内のみ）をDBに
-
-ここから先は「個人開発のWebサービス公開」になる。やるなら伴走する。
+- **データが端末内だけ** → 機種変で消える。複数端末で同期したいなら Vercel Postgres / KV などのDBを足してユーザーごとに保存。
+- **他人にも使わせる** → ログイン（認証）とAPIコストの管理・課金設計が要る。Vercel Hobbyは個人/非商用まで。商用は Pro。
+- ここから先は「個人開発Webサービスの運営」フェーズ。やるなら伴走する。
