@@ -151,7 +151,17 @@ class Handler(BaseHTTPRequestHandler):
         elif path == "/api/health":
             self._json(200, {"ok": True, "model": MODEL, "has_key": _client is not None})
         else:
-            self._send(404, "not found", "text/plain; charset=utf-8")
+            # 静的ファイル（manifest.json / アイコン等）。Vercelでは自動配信される分をローカルでも再現
+            name = os.path.basename(path)
+            types = {".png": "image/png", ".json": "application/json; charset=utf-8",
+                     ".ico": "image/x-icon", ".svg": "image/svg+xml", ".webmanifest": "application/manifest+json"}
+            ext = os.path.splitext(name)[1]
+            target = os.path.join(HERE, name)
+            if ext in types and os.path.isfile(target):
+                with open(target, "rb") as f:
+                    self._send(200, f.read(), types[ext])
+            else:
+                self._send(404, "not found", "text/plain; charset=utf-8")
 
     def do_POST(self):
         path = self.path.split("?")[0]
