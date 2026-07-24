@@ -20,7 +20,7 @@ import re
 import base64
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-MODEL = os.environ.get("TORIMESHI_MODEL", "claude-haiku-4-5")  # 最安。精度優先なら claude-sonnet-5 / claude-opus-4-8
+MODEL = os.environ.get("TORIMESHI_MODEL", "claude-opus-4-8")  # 最上位。安くしたいなら claude-sonnet-5 / claude-haiku-4-5
 PORT = int(os.environ.get("PORT", "8787"))
 HERE = os.path.dirname(os.path.abspath(__file__))
 

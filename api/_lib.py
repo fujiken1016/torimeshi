@@ -4,7 +4,7 @@ import json
 import os
 import re
 
-MODEL = os.environ.get("TORIMESHI_MODEL", "claude-haiku-4-5")  # 最安。精度上げたいなら env で claude-sonnet-5 / claude-opus-4-8
+MODEL = os.environ.get("TORIMESHI_MODEL", "claude-opus-4-8")  # 最上位。安くしたいなら env で claude-sonnet-5 / claude-haiku-4-5
 
 try:
     import anthropic

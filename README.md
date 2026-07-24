@@ -8,7 +8,7 @@
 - **残りタンパク質の埋め方を提案**・達成演出・体重推移・日別履歴
 - データはブラウザ内（localStorage）保存。サーバはAI中継のみ
 
-構成: `index.html`（フロント） / `api/`（Vercelサーバーレス関数：`analyze`=写真解析, `coach`=相棒会話, `health`） / `server.py`（ローカル開発用）。モデルの既定は最安の `claude-haiku-4-5`（環境変数 `TORIMESHI_MODEL` で `claude-sonnet-5` / `claude-opus-4-8` に変更可）。
+構成: `index.html`（フロント） / `api/`（Vercelサーバーレス関数：`analyze`=写真解析, `coach`=相棒会話, `health`） / `server.py`（ローカル開発用）。モデルの既定は `claude-opus-4-8`（環境変数 `TORIMESHI_MODEL` で `claude-sonnet-5` / `claude-haiku-4-5` に変更するとコストを下げられる）。
 
 ---
 
