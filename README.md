@@ -47,8 +47,7 @@ Node不要・ブラウザ操作中心。無料（Functions 10万req/日）。
 3. SSL証明書が自動発行され、数分で `https://meshi.mainichi-lab.com` が有効
 
 ### 4. 仕上げ（審査要件）
-- **お問い合わせフォーム有効化**：`contact.html` の `action="https://formspree.io/f/YOUR_FORM_ID"` を、[Formspree](https://formspree.io)（無料）等で作った送信先URLに置換。またはメール `contact@mainichi-lab.com` を **Cloudflare Email Routing**（無料転送）で受信できるよう設定
-- **運営者情報**：`about.html` の連絡先を実際に受信できる窓口に
+- **お問い合わせ受信の設定**：問い合わせ先は `contact@mainichi-lab.com` に統一済み（`contact.html`・`about.html`・プラポリ）。**Cloudflare Email Routing**（無料転送）で `contact@mainichi-lab.com` → 普段のGmail等へ転送する設定を入れれば受信できる（Cloudflare → 対象ドメイン → Email → Email Routing → Custom address）
 - GA4 / Search Console 登録（プラポリに記載済み）
 
 > 以後 `git push` すると Cloudflare が自動で再デプロイする。
