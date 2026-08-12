@@ -168,6 +168,34 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+/* ===== 物販導線（相棒のおすすめ）===== */
+.pr-tag{display:inline-block;font-size:9.5px;font-weight:900;letter-spacing:.08em;color:#1a1205;
+  background:var(--f);border-radius:5px;padding:1px 5px;vertical-align:middle}
+.shop-note{font-size:11px;color:var(--dim);line-height:1.55;margin:2px 2px 16px}
+.shop-note a{color:var(--sub)}
+.gcard{display:flex;gap:13px;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:13px 14px;margin-bottom:11px;text-decoration:none;color:inherit;transition:border-color .15s}
+.gcard:active{border-color:var(--f)}
+.gcard .gi{width:50px;height:50px;border-radius:13px;background:var(--card2);display:flex;align-items:center;
+  justify-content:center;font-size:26px;flex-shrink:0}
+.gcard .gm{flex:1;min-width:0}
+.gcard .gn{font-weight:800;font-size:14.5px;margin-bottom:3px}
+.gcard .gc{font-size:12px;color:var(--sub);line-height:1.5;font-weight:600}
+.gcard .go{font-size:12px;font-weight:800;color:var(--f);white-space:nowrap;flex-shrink:0}
+.gcard.soon{opacity:.6}.gcard.soon .go{color:var(--dim)}
+/* ホーム下部の入口カード */
+.shop-entry{display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-top:16px;text-decoration:none;color:inherit}
+.shop-entry .se-ic{font-size:20px}.shop-entry .se-t{flex:1;font-size:13.5px;font-weight:700}
+.shop-entry .se-t small{display:block;color:var(--dim);font-size:11px;font-weight:600;margin-top:1px}
+.shop-entry .se-go{color:var(--f);font-weight:800;font-size:18px}
+/* 文脈スロット（タンパク質不足が続いた時）*/
+.promo{background:var(--card);border:1px solid #5a4a1f;border-radius:16px;padding:13px 14px;margin-bottom:14px;position:relative;animation:fade .3s}
+.promo .pt{font-size:13px;font-weight:700;line-height:1.5;padding-right:20px}
+.promo .pt b{color:var(--f)}
+.promo .pa{display:inline-block;margin-top:9px;font-size:12.5px;font-weight:800;color:#1a1205;background:var(--f);
+  border-radius:10px;padding:8px 14px;text-decoration:none}
+.promo .px{position:absolute;top:9px;right:11px;color:var(--dim);font-size:16px;line-height:1;background:none;border:none;padding:2px}
 </style>
 
 <!-- ONBOARDING -->
@@ -216,6 +244,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <div class="goal" id="k-left">あと –</div></div><div class="track"><i id="k-bar" style="width:0%"></i></div></div>
     <div class="sec"><h3>今日の食事</h3><a id="today-count"></a></div>
     <div id="today-list"></div>
+    <div id="promo-slot"></div>
+    <a class="shop-entry" onclick="go('shop')" style="cursor:pointer">
+      <span class="se-ic">🛒</span>
+      <span class="se-t">相棒のおすすめギア<small>プロテイン・シェイカー・スケール</small></span>
+      <span class="se-go">›</span>
+    </a>
   </div>
   <div id="v-hist" class="view hidden">
     <div class="stat-row">
@@ -246,6 +280,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
         <div class="g"><div class="v" id="set-k">–</div><div class="k">kcal</div></div>
       </div></div>
     <button class="btn" onclick="saveSettings()">保存する</button>
+    <button class="btn sub" style="margin-top:10px" onclick="go('shop')">🛒 相棒のおすすめギア</button>
     <button class="btn sub" style="margin-top:10px" onclick="resetAll()">データをリセット</button>
     <p class="note" id="apinote">…</p>
     <p class="note" style="margin-top:10px">
@@ -253,6 +288,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <a href="/contact.html" style="color:var(--sub)">お問い合わせ</a> ・
       <a href="/about.html" style="color:var(--sub)">運営者情報</a>
     </p>
+  </div>
+  <div id="v-shop" class="view hidden">
+    <div class="buddy" style="margin-top:8px;cursor:default"><div class="face">🛒</div>
+      <div class="bubble"><div class="bname"><span>相棒・<span class="shop-bname">ゲイン</span>のおすすめ</span></div>
+        <div class="btext">記録が続くようになったら、次は"道具"だ。俺が実際に薦められるやつだけ置いとく。</div></div></div>
+    <p class="shop-note"><span class="pr-tag">PR</span> このセクションはアフィリエイト広告を含みます。リンクから購入すると運営に収益が入ることがあります（商品の使い方はあなた次第。無理に買う必要はない）。<a href="/privacy.html">プライバシーポリシー</a></p>
+    <div id="shop-list"></div>
+    <button class="btn sub" style="margin-top:6px" onclick="go('home')">← ホームに戻る</button>
   </div>
   <div class="nav">
     <button id="n-home" class="on" onclick="go('home')"><span class="ic">🏠</span>ホーム</button>
@@ -276,6 +319,23 @@ const DB={
 };
 const QUICK=['鶏むね肉(皮なし)','ゆで卵','白米(150g)','プロテイン(1杯)','サラダチキン','納豆','ギリシャヨーグルト','オートミール(40g)','バナナ','牛丼(並)'];
 const PORTIONS={'少なめ':0.6,'ふつう':1,'多め':1.5,'爆盛り':2};
+/* ▼▼ 物販（相棒のおすすめ）▼▼
+   楽天：登録済み → 商品ごとのアフィリエイトURLを rakuten に貼る。
+   Amazon：もしも承認後、「かんたんリンク」等のURLを amazon に入れれば自動でそちらを優先表示（差し替えはこの1行だけ）。
+   URLが空の商品は自動で「準備中」表示になり、リンク切れにならない。*/
+const SHOP=[
+  {key:'protein',emoji:'🥤',name:'ホエイプロテイン',
+   copy:'まず一本これ。タンパク質が足りない日は、これで詰めるのが一番早い。味で選べ、続かなきゃ意味ない。',
+   rakuten:'',amazon:''},
+  {key:'shaker',emoji:'🥛',name:'プロテインシェイカー',
+   copy:'プロテイン飲むなら相棒に。ダマにならず、ジムバッグに一個放り込んどけ。',
+   rakuten:'',amazon:''},
+  {key:'scale',emoji:'⚖️',name:'キッチンスケール',
+   copy:'「だいたい」をやめると記録が化ける。鶏むね何g乗せたか、目分量じゃなく1g単位。伸びる奴の分かれ道だ。',
+   rakuten:'',amazon:''},
+];
+function shopUrl(p){return (p.amazon||p.rakuten||'').trim();}
+let promoDismissed=false;
 let S=load();
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||null}catch(e){return null}}
 function save(){localStorage.setItem(KEY,JSON.stringify(S))}
@@ -339,7 +399,7 @@ function render(){
   const left=t.kcal-cur.kcal;document.getElementById('k-left').textContent=left>=0?('あと '+left+' kcal'):('+'+(-left)+' オーバー');
   document.getElementById('k-bar').style.width=Math.min(100,cur.kcal/t.kcal*100)+'%';
   document.getElementById('b-name').textContent='相棒・'+bname();
-  buddyTalk(cur,t);proteinFill(cur,t);
+  buddyTalk(cur,t);proteinFill(cur,t);proteinPromo();
   const meals=(S.days[todayKey()]||{meals:[]}).meals;
   document.getElementById('today-count').textContent=meals.length?meals.length+'食':'';
   document.getElementById('today-list').innerHTML=meals.length?meals.map((m,i)=>mealCard(m,i)).join(''):'<div class="empty">まだ記録なし。＋から今日の一食目をどうぞ🍚</div>';
@@ -359,6 +419,28 @@ function quickLog(name,P){const tk=todayKey();if(!S.days[tk])S.days[tk]={meals:[
   const before=dayTotals().P;S.days[tk].meals.push({name,emoji:'💪',img:null,P,F:2,C:2,kcal:P*4+2*9+2*4});save();
   const after=dayTotals().P,t=S.targets;render();
   if(before<t.P&&after>=t.P)celebrate('P目標クリア！🔥','今日のタンパク質'+t.P+'g、達成だ相棒。');else toast(name+' を記録したよ💪');}
+
+/* 直近3日で「記録はあるがP未達」だった日数 */
+function lowPDays(){const t=S.targets||calcTargets(S);let n=0;const d=new Date();
+  for(let i=0;i<3;i++){const k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(),day=S.days[k];
+    if(day&&day.meals.length){if(day.meals.reduce((a,m)=>a+m.P,0)<t.P)n++;}
+    d.setDate(d.getDate()-1);}
+  return n;}
+/* 文脈スロット：タンパク質不足が続いた時だけ1枠・却下可・押し付けない */
+function proteinPromo(){const slot=document.getElementById('promo-slot');
+  if(promoDismissed||lowPDays()<2){slot.innerHTML='';return;}
+  slot.innerHTML=`<div class="promo"><button class="px" onclick="promoDismissed=true;proteinPromo()">×</button>
+    <div class="pt">😤 タンパク質、足りない日が続いてるな。食事だけできついなら<b>プロテイン一本</b>あると全然違うぞ。</div>
+    <a class="pa" onclick="go('shop')" style="cursor:pointer">相棒のおすすめを見る</a>
+    <span class="pr-tag" style="margin-left:8px">PR</span></div>`;}
+/* おすすめギア一覧（amazon優先→無ければrakuten→無ければ準備中）*/
+function renderShop(){
+  const bn=document.querySelector('#v-shop .shop-bname');if(bn)bn.textContent=bname();
+  document.getElementById('shop-list').innerHTML=SHOP.map(p=>{
+    const url=shopUrl(p),via=p.amazon?'Amazonで見る':'楽天で見る';
+    if(!url)return `<div class="gcard soon"><div class="gi">${p.emoji}</div><div class="gm"><div class="gn">${p.name}</div><div class="gc">${p.copy}</div></div><div class="go">準備中</div></div>`;
+    return `<a class="gcard" href="${url}" target="_blank" rel="sponsored noopener nofollow"><div class="gi">${p.emoji}</div><div class="gm"><div class="gn">${p.name}</div><div class="gc">${p.copy}</div></div><div class="go">${via} ›</div></a>`;
+  }).join('');}
 
 /* buddy (local default + optional AI refresh via chat) */
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
@@ -483,9 +565,10 @@ function celebrate(h,p){const el=document.createElement('div');el.className='cel
 const st=document.createElement('style');st.textContent='@keyframes fall{to{transform:translateY(108dvh) rotate(560deg);opacity:.2}}';document.head.appendChild(st);
 
 /* nav */
-function go(view){['home','hist','set'].forEach(x=>{document.getElementById('v-'+x).classList.toggle('hidden',x!==view);
+function go(view){['home','hist','set','shop'].forEach(x=>{document.getElementById('v-'+x).classList.toggle('hidden',x!==view);
   const n=document.getElementById('n-'+x);if(n)n.classList.toggle('on',x===view);});
-  if(view==='hist')renderHist();if(view==='set')fillSettings();}
+  if(view==='hist')renderHist();if(view==='set')fillSettings();if(view==='shop')renderShop();
+  window.scrollTo(0,0);}
 
 /* history */
 function renderHist(){const ws=S.weights||[],now=ws.length?ws[ws.length-1].w:S.w,first=ws.length?ws[0].w:S.w;
