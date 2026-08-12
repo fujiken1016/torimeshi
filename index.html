@@ -320,19 +320,19 @@ const DB={
 const QUICK=['鶏むね肉(皮なし)','ゆで卵','白米(150g)','プロテイン(1杯)','サラダチキン','納豆','ギリシャヨーグルト','オートミール(40g)','バナナ','牛丼(並)'];
 const PORTIONS={'少なめ':0.6,'ふつう':1,'多め':1.5,'爆盛り':2};
 /* ▼▼ 物販（相棒のおすすめ）▼▼ スロット一覧はリポジトリ直下の AFF_SLOTS.md
-   楽天：アフィリエイトURL発行後、rakuten を差し替える（今は検索ページ直リンク）。
+   楽天：rakuten は商品ページ直リンク（2026-08-12にCVR改善のため検索結果ページから差し替え済み）。
    Amazon：もしも承認後、「かんたんリンク」等のURLを amazon に入れれば自動でそちらを優先表示（差し替えはこの1行だけ）。
    URLが空の商品は自動で「準備中」表示になり、リンク切れにならない。*/
 const SHOP=[
   {key:'protein',aff:'RAKUTEN_PROTEIN',emoji:'🥤',name:'ホエイプロテイン',
    copy:'まず一本これ。タンパク質が足りない日は、これで詰めるのが一番早い。味で選べ、続かなきゃ意味ない。',
-   rakuten:'https://hb.afl.rakuten.co.jp/hgc/5684fd12.0952a564.5684fd13.520271a6/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%259B%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2586%25E3%2582%25A4%25E3%2583%25B3%2F',amazon:''},
+   rakuten:'https://hb.afl.rakuten.co.jp/hgc/5684fd12.0952a564.5684fd13.520271a6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frealstyle4u%2Fblp-s%2F',amazon:''},
   {key:'shaker',aff:'RAKUTEN_SHAKER',emoji:'🥛',name:'プロテインシェイカー',
    copy:'プロテイン飲むなら相棒に。ダマにならず、ジムバッグに一個放り込んどけ。',
-   rakuten:'https://hb.afl.rakuten.co.jp/hgc/5684fd12.0952a564.5684fd13.520271a6/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2586%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25AB%25E3%2583%25BC%2F',amazon:''},
+   rakuten:'https://hb.afl.rakuten.co.jp/hgc/5684fd12.0952a564.5684fd13.520271a6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkyomo%2Fble003%2F',amazon:''},
   {key:'scale',aff:'RAKUTEN_SCALE',emoji:'⚖️',name:'キッチンスケール',
    copy:'「だいたい」をやめると記録が化ける。鶏むね何g乗せたか、目分量じゃなく1g単位。伸びる奴の分かれ道だ。',
-   rakuten:'https://hb.afl.rakuten.co.jp/hgc/5684fd12.0952a564.5684fd13.520271a6/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2582%25AD%25E3%2583%2583%25E3%2583%2581%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AB%2F',amazon:''},
+   rakuten:'https://hb.afl.rakuten.co.jp/hgc/5684fd12.0952a564.5684fd13.520271a6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2Fe284398h%2F',amazon:''},
 ];
 function shopUrl(p){return (p.amazon||p.rakuten||'').trim();}
 let promoDismissed=false;
