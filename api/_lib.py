@@ -6,9 +6,14 @@ import re
 
 MODEL = os.environ.get("TORIMESHI_MODEL", "claude-opus-4-8")  # 最上位。安くしたいなら env で claude-sonnet-5 / claude-haiku-4-5
 
+# 🔴 キルスイッチ（2026-09-03）: 既定で停止。Cloudflare 本番の functions/api/_lib.js と同じ挙動。
+# 旧 Vercel / ローカル開発用の残置コードだが、キーが載った環境で動かすと同じ課金経路が開くため揃える。
+# 使いたいときだけ TORIMESHI_API_ENABLED=1 を設定する。
+API_ENABLED = os.environ.get("TORIMESHI_API_ENABLED", "") == "1"
+
 try:
     import anthropic
-    _client = anthropic.Anthropic() if os.environ.get("ANTHROPIC_API_KEY") else None
+    _client = anthropic.Anthropic() if (API_ENABLED and os.environ.get("ANTHROPIC_API_KEY")) else None
 except Exception:
     anthropic = None
     _client = None

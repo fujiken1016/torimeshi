@@ -488,6 +488,7 @@ function openChat(){
     ||`<div class="msg b">よお。今日の調子どうだ？飯のこと、なんでも聞いてくれ。</div>`;
   el.innerHTML=`<div class="panel"><div class="grip"></div>
     <h2>相棒・${bname()} 💬</h2>
+    ${AI_ON===false?'<p class="note" style="margin:0 0 10px">🔧 相棒との会話は現在停止中です。食事の記録・集計・グラフはこれまで通り使えます。</p>':''}
     <div class="chatlog" id="chatlog">${log}</div>
     <div class="chatbar"><input class="input" id="chatin" placeholder="例：減量きつい / あと何食べれば？"><button onclick="sendChat()">送信</button></div>
     <button class="btn sub" style="margin-top:12px" onclick="closeSheet()">閉じる</button></div>`;
@@ -508,7 +509,8 @@ async function sendChat(){
     log.insertAdjacentHTML('beforeend',`<div class="msg b">${esc(r.reply)}</div>`);log.scrollTop=9e9;
     document.getElementById('b-text').textContent=r.reply;
   }catch(e){const tp=document.getElementById('typing');if(tp)tp.remove();
-    log.insertAdjacentHTML('beforeend',`<div class="msg b">${e.data&&e.data.error==='no_api_key'?'（サーバにAPIキー未設定。README参照で設定してくれ）':'（通信エラー。サーバ動いてる？）'}</div>`);}
+    const ec=e.data&&e.data.error;
+    log.insertAdjacentHTML('beforeend',`<div class="msg b">${ec==='service_disabled'?'🔧 ごめん、相棒との会話機能は現在停止中なんだ。食事の記録・集計はこれまで通り使えるよ。':ec==='no_api_key'?'（サーバにAPIキー未設定。README参照で設定してくれ）':'（通信エラー。サーバ動いてる？）'}</div>`);}
 }
 
 /* ADD sheet */
@@ -535,14 +537,15 @@ async function onPhoto(e){
   rd.onload=async ev=>{const img=ev.target.result;
     document.getElementById('drop-inner').innerHTML=`<img src="${img}">`;
     const area=document.getElementById('result-area');
-    area.innerHTML=`<div class="analyzing"><div class="spin"></div>Claudeが解析中…料理を見てる👀</div>`;
+    area.innerHTML=`<div class="analyzing"><div class="spin"></div>解析中…料理を見てる👀</div>`;
     try{const r=await api('/api/analyze',{image:img,mode:S.mode});
       draft={name:r.name,emoji:'🍽️',img,portion:1,P:r.P,F:r.F,C:r.C};
       renderResult('🤖 AI推定：'+(r.note||'たぶんこれ。違ったら下で直して'));
     }catch(err){ // フォールバック：ローカル推定
       const keys=Object.keys(DB),g=keys[Math.floor((file.size||5000)/97)%keys.length],b=DB[g];
       draft={name:g,emoji:b[3],img,portion:1,P:b[0],F:b[1],C:b[2]};
-      renderResult(err.data&&err.data.error==='no_api_key'?'⚠️ APIキー未設定→仮の推定。下で直して':'⚠️ オフライン推定。下で直して');
+      const ec=err.data&&err.data.error;
+      renderResult(ec==='service_disabled'?'🔧 AI解析は現在停止中。内蔵データからの簡易推定です。下の数値を実際の食事に合わせて直してね':ec==='no_api_key'?'⚠️ APIキー未設定→仮の推定。下で直して':'⚠️ オフライン推定。下で直して');
     }};
   rd.readAsDataURL(file);
 }
@@ -627,12 +630,16 @@ function saveSettings(){S.buddy=document.getElementById('set-name').value.trim()
   S.w=parseFloat(v('set-w'))||S.w;S.h=parseFloat(v('set-h'))||S.h;S.age=parseInt(v('set-age'))||S.age;S.sex=setSex;S.mode=setMode;S.act=setAct;save();go('home');render();toast('目標を更新したよ💪');}
 function cycleMode(){const o=['cut','keep','bulk'];S.mode=o[(o.indexOf(S.mode)+1)%3];save();render();toast(MODE_JP[S.mode]+'に切り替え')}
 function resetAll(){if(confirm('すべてのデータを消す？')){localStorage.removeItem(KEY);location.reload()}}
+// AI機能の稼働フラグ（null=未確認 / true=稼働 / false=停止中）。起動時に1回だけ確認する
+let AI_ON=null;
+async function checkAI(){try{const r=await fetch(API+'/api/health').then(x=>x.json());AI_ON=(r.api==='enabled');}catch(e){AI_ON=null;}}
 async function apiNote(){const el=document.getElementById('apinote');
-  try{const r=await fetch(API+'/api/health').then(x=>x.json());
-    el.innerHTML=r.has_key?`✅ AI接続OK（${r.model}）— 写真解析・相棒会話は本物のAIで動作中`:'⚠️ サーバにAPIキー未設定。写真解析と相棒会話はREADME手順でキーを設定すると本物になります（今は仮）';
+  try{const r=await fetch(API+'/api/health').then(x=>x.json());AI_ON=(r.api==='enabled');
+    el.innerHTML=r.api==='enabled'?'✅ AI接続OK — 写真解析・相棒会話はAIで動作中':'🔧 <b>AI機能は現在停止中です。</b>写真からのPFC推定と相棒との会話は、内蔵の食事データベースによる簡易推定に切り替わっています。記録・集計・グラフはこれまで通り使えます。';
   }catch(e){el.textContent='サーバ未接続（python3 server.py で起動）';}}
 
 /* boot */
+checkAI();
 initOnboard();
 if(S&&S.w){document.getElementById('app').classList.remove('hidden');render();}
 else{document.getElementById('onboard').classList.remove('hidden');}

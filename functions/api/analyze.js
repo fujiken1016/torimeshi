@@ -1,5 +1,5 @@
 // POST /api/analyze — 写真(base64) → Claude Vision で料理とPFCを推定
-import { callAnthropic, extractJson, json } from "./_lib.js";
+import { apiEnabled, callAnthropic, disabledResponse, extractJson, json } from "./_lib.js";
 
 const ANALYZE_SYSTEM =
   "あなたはトレーニー向け食事記録アプリの栄養推定エンジン。" +
@@ -9,6 +9,8 @@ const ANALYZE_SYSTEM =
   '{"name":"料理名(日本語,簡潔)","P":数値,"F":数値,"C":数値,"confidence":0〜1,"note":"一言メモ(日本語,20字以内)"}';
 
 export async function onRequestPost({ request, env }) {
+  // 🔴 停止中は Anthropic を一切呼ばない（リクエストボディも読まない＝課金経路をここで断つ）
+  if (!apiEnabled(env)) return disabledResponse();
   try {
     const { image = "", mode = "cut" } = await request.json();
     const m = String(image).match(/^data:(image\/[a-zA-Z.+-]+);base64,([\s\S]*)$/);
