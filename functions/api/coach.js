@@ -1,7 +1,9 @@
 // POST /api/coach — 状況＋会話 → 相棒AI「ゲイン」の返答
-import { callAnthropic, json } from "./_lib.js";
+import { apiEnabled, callAnthropic, disabledResponse, json } from "./_lib.js";
 
 export async function onRequestPost({ request, env }) {
+  // 🔴 停止中は Anthropic を一切呼ばない（analyze より危険：画像不要で誰でも素の LLM 呼び出しを起こせた）
+  if (!apiEnabled(env)) return disabledResponse();
   try {
     const ctx = await request.json();
     const name = ctx.buddy || "ゲイン";
