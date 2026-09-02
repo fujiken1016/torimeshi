@@ -8,6 +8,26 @@
 - **残りタンパク質の埋め方を提案**・達成演出・体重推移・日別履歴
 - データはブラウザ内（localStorage）保存。サーバはAI中継のみ
 
+## 🔴 現在 `/api/*` は停止中（2026-09-03〜）
+
+`/api/analyze`（写真解析）と `/api/coach`（相棒会話）は**既定で停止**しており、**Anthropic を一切呼ばない**（503 `service_disabled`）。
+記録・集計・グラフ・写真の内蔵データ推定は従来通り動く。
+
+**なぜ**：この2本は**認証もレート制限も Origin 制限も無いまま公開**されており、環境変数の `ANTHROPIC_API_KEY` が有効だった＝
+**誰でも従量課金を発生させられる**状態だった（`/api/health` が `has_key:true` を返していた）。
+とくに `/api/coach` は画像すら不要で、`{}` を POST するだけで素の Claude 呼び出しが走った。
+外部からの実ユーザーがゼロ（Search Console 28日で表示0）のため、機能を維持する価値より課金リスクが大きいと判断した。
+
+**再開するとき（⚠️ 無認証のまま開け直さないこと）**
+1. **先に**レート制限（Cloudflare の Rate Limiting Rules）か Origin/Referer 制限を入れる
+2. Cloudflare Pages → Settings → Variables に **`TORIMESHI_API_ENABLED` = `1`** を追加して再デプロイ
+3. コスト対策に `TORIMESHI_MODEL` を `claude-haiku-4-5` などへ（既定は `claude-opus-4-8`）
+
+キルスイッチの実体＝`functions/api/_lib.js` の `apiEnabled(env)`。`callAnthropic()` 側にも同じ判定があるので、
+**新しいエンドポイントを足して確認を忘れても止まる**。ローカル/旧Vercel用の `api/_lib.py` も同じ挙動（`TORIMESHI_API_ENABLED=1` で有効化）。
+
+---
+
 ## 構成（本番＝Cloudflare Pages）
 
 | 場所 | 役割 |
@@ -37,6 +57,7 @@ Node不要・ブラウザ操作中心。無料（Functions 10万req/日）。
 ### 2. APIキーを環境変数に
 プロジェクト → **Settings → Variables and Secrets** → **Add**
 - `ANTHROPIC_API_KEY` = 自分の `sk-ant-...`（Secret推奨）
+- 🔴 **`TORIMESHI_API_ENABLED` = `1`（これが無いと `/api/*` は停止したまま）。上の「現在 `/api/*` は停止中」を先に読むこと**
 - （任意）`TORIMESHI_MODEL` = `claude-sonnet-5` などで節約
 - 追加後 **Deployments → 最新を Retry/Redeploy** で反映
 
