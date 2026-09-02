@@ -9,9 +9,14 @@
  * 「そのリンクが踏まれたのか」を知る手段は GA4 のこのイベント以外に存在しない。
  *
  * 送るイベント（3サイトで名前を揃えてある＝月次で横に並べて読める）：
- *   kindle_click { book, from_page }
- *   note_click   { note_id, product, from_page }
- *   aff_click    { network, item_id, from_page }   network = a8 | rakuten | vc
+ *   kindle_click { book, from_page, slot }
+ *   note_click   { note_id, product, from_page, slot }
+ *   aff_click    { network, item_id, from_page, slot }   network = a8 | rakuten | vc
+ *
+ * slot＝リンク（またはその祖先）の `data-aff` 属性。どの枠から踏まれたかを分解するため。
+ * 例：RAKUTEN_HOGEN_* / RAKUTEN_BJ_BOOK1 / A8_YOTSUYA / VC_LEC。属性が無ければ空文字。
+ * 🔑 方言ラボの 9/27「楽天書籍リンク4週判定」は slot 別のクリック数が判定材料なので、
+ *    この項目を落とすと判定できなくなる（2026-09-02 に共通版へ寄せた際の必須要件）。
  *
  * 🔴 このファイルにAdSenseコードを足さないこと（shoubu-lab 系は隔離ドメイン）。
  * 注意：gtag 未ロード（広告ブロッカー等）でも例外を投げない。UIを壊さないこと優先。
@@ -26,6 +31,17 @@
     n50a7bb4bf933: "note_free_kubun",
     n574a0c6a6056: "note_free_nochiho"
   };
+
+  /* リンク自身か祖先の data-aff（掲載枠のID）。無ければ空文字。
+     宅建GYM/BJ は <a> 自身に、方言ラボは囲みの PrBox に付いている＝closest で両方拾う。 */
+  function slotOf(a) {
+    try {
+      var el = a.closest("[data-aff]");
+      return (el && el.getAttribute("data-aff")) || "";
+    } catch (e) {
+      return "";
+    }
+  }
 
   function send(name, params) {
     try {
@@ -42,13 +58,15 @@
       if (!a) return;
       var href = a.getAttribute("href") || "";
       var from = location.pathname;
+      var slot = slotOf(a);
 
       if (href.indexOf("amazon.co.jp") > -1 || href.indexOf("amzn.to") > -1) {
         var asin = href.match(/\/dp\/([A-Z0-9]{10})/);
         asin = asin ? asin[1] : "unknown";
         send("kindle_click", {
           book: asin === "B0HFW15W4R" ? "chinkan_jobun" : asin,
-          from_page: from
+          from_page: from,
+          slot: slot
         });
         return;
       }
@@ -59,13 +77,14 @@
         send("note_click", {
           note_id: id,
           product: NOTE_MAP[id] || "note_other",
-          from_page: from
+          from_page: from,
+          slot: slot
         });
         return;
       }
 
       if (href.indexOf("px.a8.net") > -1) {
-        send("aff_click", { network: "a8", item_id: "unknown", from_page: from });
+        send("aff_click", { network: "a8", item_id: "unknown", from_page: from, slot: slot });
         return;
       }
 
@@ -75,7 +94,8 @@
         send("aff_click", {
           network: "rakuten",
           item_id: r ? r[1] : "unknown",
-          from_page: from
+          from_page: from,
+          slot: slot
         });
         return;
       }
@@ -86,7 +106,8 @@
         send("aff_click", {
           network: "vc",
           item_id: v ? v[1] : "unknown",
-          from_page: from
+          from_page: from,
+          slot: slot
         });
         return;
       }
