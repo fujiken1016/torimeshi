@@ -15,6 +15,17 @@
 <link rel="icon" href="/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/read.css">
+<style>
+/* このハブ面だけ、見出し階層を memory/design_guidelines.md §3-2 のタイプスケールに合わせる。
+   共通の /read.css は記事4本と共有しているので、そちらは触らずここで上書きする
+   （digest §1 の「共通CSSの値をページ内 style で上書きして直した面は検査が黙る」に沿った直し方）。
+   2026-09-14：この面に初めて h2/h3 を置いたことで、サイト共通の
+   h2=17px / h3=15px（本文14.5px の1.17倍・1.03倍）が design_audit G) に出たため。 */
+.wrap>h1{font-size:2.125rem;line-height:1.15;font-weight:700}
+.wrap>h2{font-size:1.625rem;line-height:1.35;font-weight:700}
+.wrap>h3{font-size:1.3125rem;line-height:1.35;font-weight:700}
+.wrap>p:not([class]):not([style]),.wrap>ul>li{font-size:1.0625rem;line-height:1.85}
+</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8289616283786904" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XRJ40EFR6C"></script>
@@ -25,7 +36,7 @@
   gtag('config', 'G-XRJ40EFR6C');
 </script>
 <script src="/oc.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"読み物｜食事管理と記録のコツ｜トレ飯相棒","url":"https://meshi.mainichi-lab.com/read/","inLanguage":"ja","datePublished":"2026-08-13","dateModified":"2026-08-13"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"読み物｜食事管理と記録のコツ｜トレ飯相棒","url":"https://meshi.mainichi-lab.com/read/","inLanguage":"ja","datePublished":"2026-08-13","dateModified":"2026-09-14"}</script>
 </head>
 <body>
 <div class="wrap">
@@ -80,12 +91,43 @@
   <a class="cta" href="/">アプリを使ってみる →</a>
   <p style="font-size:12.5px;color:#5a6473;text-align:center">インストール不要・無料。記録はブラウザ内に保存されます。</p>
 
+  <h2>4本をこの順に並べた理由</h2>
+  <p>置いているのはレシピでも献立でもなく、<strong>食事を管理しようとした人が最初に引っかかる4つの論点</strong>だけです。「何を食べるか」より先に「何を見て判断するか」が決まっていないと、どんな道具を使っても表示された数字が意味を持ちません。そこで、指標の意味（PFC）、記録という作業そのもののコスト、外食という避けられない場面、体重という数字の読み方、に絞り込みました。</p>
+  <p>上から下への並びは、<strong>前の記事で決めたことを次の記事が使う</strong>という依存関係です。まずPFCで見る対象を決める。次にそれを記録する手段を決める。次に自炊できない日の扱いを決める。最後に、その積み重ねを体重という数字でどう判定するか。4本とも同じ日（2026年8月13日）に出しているため、公開日では順番が分かりません。</p>
+  <p>タグは3種類に割れています。「食事管理の基礎」がPFCの基本と外食の選び方で2本、「習慣化・記録のコツ」が1本、「数字との付き合い方」が1本。前半は口に入れるものの話、後半は続け方と判定の話、という区切りです。</p>
+
+  <h2>自分に近いところから入る</h2>
+  <p><strong>「PFC」という略語を初めて見たなら、1本目から。</strong>P・F・Cが体内で担っている役割と1gあたりのエネルギー量を知らずに配分の％だけ読むと、ただの暗記になってしまいます。</p>
+  <p><strong>言葉は知っているが続かない、という悩みなら2本目へ。</strong>三日坊主の正体を、意志ではなく入力コスト・完璧主義・フィードバックの遅さという設計の問題として扱っています。</p>
+  <p><strong>自炊がほとんどできない生活なら3本目を先に。</strong>商品を1つずつ調べるやり方は続かないので、丼もの・麺・定食というカテゴリ単位で「いま何の役割が空いているか」を捉える方法へ切り替えます。栄養成分表示のどこを見るかも扱っています。</p>
+  <p><strong>記録は続いているのに体重が動かず困っている場合は4本目。</strong>4本の中では最も長く、体重計の数字が1日単位で何を映しているのか、測定条件の固定、判断までに取るべき期間を順に扱います。</p>
+
+  <h2>根拠にしている公的資料</h2>
+  <p>この一覧のいちばんの特徴は、<strong>4本すべてに出典または参考資料の欄が付いている</strong>点です（3本は「出典・参考」、1本は「参考」という見出しで置いています）。食事と体重は根拠のない数字が広まりやすい領域なので、数値を挙げるときは必ず出どころを書く、という決め方をしました。参照しているのは次の3系統です。</p>
+  <ul>
+    <li>厚生労働省「日本人の食事摂取基準（2025年版）」策定検討会報告書 — エネルギー産生栄養素バランスの目標量、たんぱく質の推奨量、目標とするBMIの範囲</li>
+    <li>厚生労働省 e-ヘルスネット — 「栄養・食生活」「たんぱく質」「エネルギー産生栄養素」「体脂肪計」「健康づくりのための身体活動・運動ガイド2023」</li>
+    <li>消費者庁「栄養成分表示について」 — 食品表示法にもとづく義務表示5項目</li>
+  </ul>
+  <p>逆に、特定の商品・サプリメント・ダイエット法をすすめる記事は1本もありません。挙げた数値はすべて一般的な目安として扱い、「これを飲めば」「この方法なら何kg落ちる」という書き方は避けています。個人差の大きい領域で、個人が運営するサイトの断定できる範囲を超えるからです。</p>
+  <p>分量は4本で合わせて約12,000字、1本あたりおよそ3,000字。最長の「体重が動かない時期の考え方」で約3,400字、最短の「食事記録が続かない理由」で約2,800字と差が小さく、どれか1本が本体で他は付け足し、という構成にはしていません。</p>
+
+  <h2>よくある質問</h2>
+  <h3>記事を読まないとアプリは使えませんか？</h3>
+  <p>いいえ。<a href="/">トレ飯相棒</a>は記事を読んでいなくても動きます。読み物のほうは、アプリが出した数字の意味が分からなくなったときに戻ってくる場所として置いています。</p>
+  <h3>ダイエットの方法を教えてくれる記事はありますか？</h3>
+  <p>特定のやり方をすすめる記事は置いていません。扱うのは、指標の意味・記録の続け方・外食での選び方・数字の見方という、どの方法を採る場合でも前提になる部分だけです。</p>
+  <h3>数値は誰にでも当てはまりますか？</h3>
+  <p>当てはまりません。公的資料の目標量は集団に向けて示されたもので、必要量は年齢・体格・活動量・持病によって変わります。同じ注記は各記事にも入れています。</p>
+  <h3>今後、本数は増えますか？</h3>
+  <p>不定期に足します。ただし冊数を稼ぐつもりはありません。この4本で「見る対象を決める → 記録する → 外食を乗り切る → 判定する」が一周できているので、その周回の途中で説明の足りない箇所が見つかったときだけ追加します。</p>
+
   <div class="caution">
     <div class="ct">ご確認ください</div>
     <p>本サイトの記事および当サービスが扱う栄養値・目標値は一般的な目安・概算であり、特定の効果を保証するものではありません。必要な量には個人差があります。体調・疾患・食事制限に関する判断は、必ず医師・管理栄養士などの専門家にご相談ください。</p>
   </div>
 
-  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-08-13">2026年8月13日</time></p>
+  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-08-13">2026年8月13日</time>　最終更新：<time datetime="2026-09-14">2026年9月14日</time></p>
   <div class="foot">
     <div class="fl">
       <a href="/">アプリトップ</a>
