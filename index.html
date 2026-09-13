@@ -162,6 +162,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .daycard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px}
 .daycard .dh{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800}.daycard .dh .dk{color:var(--sub)}
 .daycard .macs{display:flex;gap:12px;margin-top:8px;font-size:11.5px;font-weight:700}.daycard .macs b{font-size:13px}
+/* ツールの下に置く静的な解説（2026-09-14 追加）。本文16px・行間1.9 */
+.guide{padding:24px 18px 8px;border-top:1px solid var(--line);margin-top:10px}
+.guide h2{font-size:20px;font-weight:700;line-height:1.4;margin-bottom:10px}
+.guide h3{font-size:17px;font-weight:700;line-height:1.6;margin:22px 0 8px}
+.guide p{font-size:16px;line-height:1.9;color:var(--sub);margin-bottom:12px}
+.guide ol{margin:0 0 12px 1.4em;padding:0}
+.guide ol li{font-size:16px;line-height:1.9;color:var(--sub);margin-bottom:10px}
+.guide ol li b,.guide p b{color:var(--ink);font-weight:700}
+.guide dl{margin:0}
+.guide dt{font-size:16px;line-height:1.8;font-weight:700;color:var(--ink);margin-top:14px}
+.guide dd{font-size:16px;line-height:1.9;color:var(--sub);margin:4px 0 0}
+.guide .rel{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.guide .rel a{display:inline-flex;align-items:center;min-height:48px;padding:6px 14px;border:1px solid var(--line);
+  border-radius:12px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:700}
 .note{text-align:center;color:var(--dim);font-size:11px;margin-top:18px;line-height:1.6}
 /* chat */
 .chatlog{display:flex;flex-direction:column;gap:10px;margin:6px 0 14px;min-height:120px}
@@ -170,13 +184,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .msg.u{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
 .msg.typing{color:var(--dim)}
 .chatbar{display:flex;gap:8px;position:sticky;bottom:0;background:var(--bg);padding-top:6px}
-.chatbar input{flex:1}.chatbar button{padding:0 18px;border-radius:12px;background:var(--accent);color:#fff;font-weight:800}
+.chatbar input{flex:1}.chatbar button{padding:0 18px;border-radius:12px;background:var(--accent);color:#fff;font-weight:700}
 /* 端末の「視差効果を減らす」設定を尊重 */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 /* ===== 物販導線（相棒のおすすめ）===== */
-.pr-tag{display:inline-block;font-size:9.5px;font-weight:900;letter-spacing:.08em;color:#1a1205;
+.pr-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.08em;color:#1a1205;
   background:var(--f);border-radius:5px;padding:1px 5px;vertical-align:middle}
 .shop-note{font-size:11px;color:var(--dim);line-height:1.55;margin:2px 2px 16px}
 .shop-note a{color:var(--sub)}
@@ -186,21 +200,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .gcard .gi{width:50px;height:50px;border-radius:13px;background:var(--card2);display:flex;align-items:center;
   justify-content:center;font-size:26px;flex-shrink:0}
 .gcard .gm{flex:1;min-width:0}
-.gcard .gn{font-weight:800;font-size:14.5px;margin-bottom:3px}
+.gcard .gn{font-weight:700;font-size:14.5px;margin-bottom:3px}
 .gcard .gc{font-size:12px;color:var(--sub);line-height:1.5;font-weight:600}
-.gcard .go{font-size:12px;font-weight:800;color:var(--f);white-space:nowrap;flex-shrink:0}
+.gcard .go{font-size:12px;font-weight:700;color:var(--f);white-space:nowrap;flex-shrink:0}
 .gcard.soon{opacity:.6}.gcard.soon .go{color:var(--dim)}
 /* ホーム下部の入口カード */
 .shop-entry{display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,var(--card2),var(--card));
   border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-top:16px;text-decoration:none;color:inherit}
 .shop-entry .se-ic{font-size:20px}.shop-entry .se-t{flex:1;font-size:13.5px;font-weight:700}
 .shop-entry .se-t small{display:block;color:var(--dim);font-size:11px;font-weight:600;margin-top:1px}
-.shop-entry .se-go{color:var(--f);font-weight:800;font-size:18px}
+.shop-entry .se-go{color:var(--f);font-weight:700;font-size:18px}
 /* 文脈スロット（タンパク質不足が続いた時）*/
 .promo{background:var(--card);border:1px solid #5a4a1f;border-radius:16px;padding:13px 14px;margin-bottom:14px;position:relative;animation:fade .3s}
 .promo .pt{font-size:13px;font-weight:700;line-height:1.5;padding-right:20px}
 .promo .pt b{color:var(--f)}
-.promo .pa{display:inline-block;margin-top:9px;font-size:12.5px;font-weight:800;color:#1a1205;background:var(--f);
+.promo .pa{display:inline-block;margin-top:9px;font-size:12.5px;font-weight:700;color:#1a1205;background:var(--f);
   border-radius:10px;padding:8px 14px;text-decoration:none}
 .promo .px{position:absolute;top:9px;right:11px;color:var(--dim);font-size:16px;line-height:1;background:none;border:none;padding:2px}
 </style>
@@ -316,6 +330,52 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <div id="shop-list"></div>
     <button class="btn sub" style="margin-top:6px" onclick="go('home')">← ホームに戻る</button>
   </div>
+  <section class="guide">
+    <h2>トレ飯相棒について</h2>
+    <p>筋トレをしている人のための食事記録ツールです。体重・身長・年齢・性別・目標・トレーニング頻度を一度入れると、1日の目標カロリーとPFC（たんぱく質・脂質・炭水化物）を自動で出します。あとは食べたものを足していくだけで、残りがその場で分かります。</p>
+    <p>相棒の「ゲイン」は説教をしません。ただ、たんぱく質が足りていないときに「あと何gで、何を食べれば埋まるか」を具体的に出してきます。登録もインストールも要りません。記録はこの端末の中だけに保存されます。</p>
+
+    <h3>使い方</h3>
+    <ol>
+      <li><b>体のことを入れる</b>：体重・身長・年齢・性別と、増量／減量／維持、週の頻度を選びます。入力しているそばから1日の目標が下に出ます。</li>
+      <li><b>食べたら「＋」で足す</b>：画面下の「＋」から、内蔵の食品リスト（27品目）を選ぶか、写真を撮ります。量は「少なめ・ふつう・多め・爆盛り」で0.6〜2.0倍に調整できます。</li>
+      <li><b>数値を自分の食事に合わせる</b>：記録する前に、P・F・Cのスライダーを動かして実際に食べた量へ寄せられます。リストに無い料理は近いものを選んで数値を直してください。</li>
+      <li><b>残りを見る</b>：ホームのリングとバーが、目標に対する今日の残りです。相棒のふきだしに、残りを埋める食べ方が出ます。</li>
+      <li><b>記録タブで振り返る</b>：日別の履歴と体重の推移がグラフで見られます。設定（⚙️）から目標モードの切り替えとデータのリセットができます。</li>
+    </ol>
+
+    <h3>PFCをどう計算しているか</h3>
+    <p>推測ではなく、決まった式で出しています。使っているのは <b>Mifflin-St Jeor</b> の基礎代謝式です。</p>
+    <p>基礎代謝＝10×体重(kg)＋6.25×身長(cm)−5×年齢、これに男性は＋5、女性は−161を足します。そこへ活動係数を掛けたものが1日の消費カロリーの目安です。係数は週2〜3回なら1.375、週4〜5回なら1.55、ほぼ毎日なら1.725を使っています。</p>
+    <p>目標カロリーは、増量期はそこに＋300kcal、減量期は−400kcal、維持期はそのままです。たんぱく質は体重1kgあたり増量2.0g・減量2.4g・維持2.0g、脂質は1kgあたり増量1.0g・減量0.8g・維持0.9gで置いています。炭水化物は、目標カロリーからたんぱく質（×4kcal）と脂質（×9kcal）を引いた残りを4で割って出します。</p>
+    <p>減量期にたんぱく質を多めに取っているのは、カロリーを削る局面ほど筋量を守る必要があるためです。数字はあくまで出発点の目安で、体組成や種目によって適正は変わります。持病がある方や通院中の方は、医師・管理栄養士の指示を優先してください。このアプリは医療行為でも栄養指導でもありません。</p>
+
+    <h3>いま動いていない機能（正直に書きます）</h3>
+    <p>写真からのAI解析と、相棒とのチャットは<b>現在停止しています</b>。この2つのAPIが認証もレート制限もないまま公開されていて、外部から誰でも従量課金を発生させられる状態だったため、2026年9月3日に止めました。</p>
+    <p>停止中は、写真を撮ると内蔵の食品データからの簡易推定に切り替わります。推定はそのまま使わず、スライダーで実際の食事に合わせてください。食事の記録・集計・グラフ・体重の推移・目標計算は、これまで通り動きます。</p>
+
+    <h3>よくある質問</h3>
+    <dl>
+      <dt>会員登録やログインは必要ですか。</dt>
+      <dd>必要ありません。記録はすべてブラウザの中（ローカルストレージ）に保存され、サーバーには送っていません。別の端末やシークレットウィンドウには引き継がれません。</dd>
+      <dt>出てきたPFCの数字は、そのまま守ればいいですか。</dt>
+      <dd>目安としてお使いください。式で出した値なので、体脂肪率や種目、生活の運動量までは見ていません。体重の推移を2〜3週間見て、動かなければカロリーを調整するのが現実的です。</dd>
+      <dt>食品リストに無いものを食べました。</dt>
+      <dd>近いものを選んで、P・F・Cのスライダーを実際の量に合わせて動かしてください。量の倍率（少なめ〜爆盛り）と組み合わせれば、たいていの食事は近い数字にできます。</dd>
+      <dt>増量と減量を切り替えたいです。</dt>
+      <dd>画面右上の「減量期／増量期／維持期」のボタンを押すか、設定（⚙️）から切り替えられます。切り替えると目標カロリーとPFCがその場で計算し直されます。</dd>
+      <dt>記録を全部消したいです。</dt>
+      <dd>設定（⚙️）の「データをリセット」で消せます。消したデータは元に戻せないので、必要な記録は先に控えておいてください。</dd>
+    </dl>
+
+    <div class="rel">
+      <a href="/read/pfc-basics">🍚 PFCバランスの基本</a>
+      <a href="/read/food-log-habit">📝 記録が続かない理由</a>
+      <a href="/read/eating-out-guide">🏪 外食・コンビニの選び方</a>
+      <a href="/read/weight-plateau">⚖️ 体重が動かない時期</a>
+    </div>
+  </section>
+
   <div class="nav">
     <button id="n-home" class="on" onclick="go('home')"><span class="ic">🏠</span>ホーム</button>
     <button onclick="openAdd()"><span class="fab">＋</span></button>
