@@ -47,3 +47,9 @@ https://hb.afl.rakuten.co.jp/ichiba/{アフィリID}/_RTLink143607?pc={URLエン
 - 検査＝`grep -rn "utm_" --include="_redirects" .` が **0行** ／ `curl -sI <短縮URL>` の `location` に `utm_` が無い
 - 実害＝2026-09-07、宅建GYMの最多クリック面 `/note`（自然検索 5クリック/41表示）が着地で utm を着せ、
   **自然検索の流入がGA4上で「note経由」に化けていた**（2026-09-13 時点で**未修正**）
+
+## 点検ログ（週次・SHIP-03）
+
+> 書式＝`YYYY-MM-DD｜実数 n／表 n｜差分`。**書かない週＝SHIP-03 が止まった週**として人事が数える。
+
+- 2026-09-16｜実数 3／表 3｜差分なし（`data-aff` の grep は1件だが `data-aff="${p.aff}"` のテンプレート1本がJS配列の RAKUTEN_PROTEIN／SHAKER／SCALE を動的生成している）
