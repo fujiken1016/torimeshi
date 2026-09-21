@@ -53,3 +53,4 @@ https://hb.afl.rakuten.co.jp/ichiba/{アフィリID}/_RTLink143607?pc={URLエン
 > 書式＝`YYYY-MM-DD｜実数 n／表 n｜差分`。**書かない週＝SHIP-03 が止まった週**として人事が数える。
 
 - 2026-09-16｜実数 3／表 3｜差分なし（`data-aff` の grep は1件だが `data-aff="${p.aff}"` のテンプレート1本がJS配列の RAKUTEN_PROTEIN／SHAKER／SCALE を動的生成している）
+- 2026-09-20｜実数 3／表 3｜差分なし（`data-aff` の grep は `index.html` 1件だが `data-aff="${p.aff}"` のテンプレート1本がJS配列の RAKUTEN_PROTEIN／SHAKER／SCALE を動的生成）
