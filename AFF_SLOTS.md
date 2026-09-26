@@ -54,3 +54,4 @@ https://hb.afl.rakuten.co.jp/ichiba/{アフィリID}/_RTLink143607?pc={URLエン
 
 - 2026-09-16｜実数 3／表 3｜差分なし（`data-aff` の grep は1件だが `data-aff="${p.aff}"` のテンプレート1本がJS配列の RAKUTEN_PROTEIN／SHAKER／SCALE を動的生成している）
 - 2026-09-20｜実数 3／表 3｜差分なし（`data-aff` の grep は `index.html` 1件だが `data-aff="${p.aff}"` のテンプレート1本がJS配列の RAKUTEN_PROTEIN／SHAKER／SCALE を動的生成）
+- 2026-09-23｜実数 3／表 3｜差分なし（`data-aff` の grep は `index.html` 1件だが `data-aff="${p.aff}"` のテンプレ1本がJS配列の RAKUTEN_PROTEIN／SHAKER／SCALE を動的生成）
