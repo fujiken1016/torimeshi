@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0c0e12">
 <title>プライバシーポリシー｜トレ飯相棒</title>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"プライバシーポリシー｜トレ飯相棒","url":"https://meshi.mainichi-lab.com/privacy","inLanguage":"ja","datePublished":"2026-08-02","dateModified":"2026-09-03"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"プライバシーポリシー｜トレ飯相棒","url":"https://meshi.mainichi-lab.com/privacy","inLanguage":"ja","datePublished":"2026-08-02","dateModified":"2026-11-12"}</script>
 <script src="/oc.js" defer></script>
 <meta name="description" content="トレ飯相棒のプライバシーポリシー。取得する情報、Cookie・アクセス解析（Googleアナリティクス）、食事写真の取り扱い、第三者提供、広告について説明しています。">
 <link rel="canonical" href="https://meshi.mainichi-lab.com/privacy">
@@ -21,20 +21,20 @@
   <div class="logo">トレ飯<b>相棒</b></div>
   <a class="back" href="/">← アプリに戻る</a>
   <h1>プライバシーポリシー</h1>
-  <p class="lead">最終更新日：2026年8月2日</p>
+  <p class="lead">最終更新日：2026年11月12日</p>
 
   <p>食事記録・栄養管理サービス「トレ飯相棒」（以下「本サービス」）における、利用者の情報・データの取り扱いを定めます。</p>
 
   <h2>1. 端末内に保存されるデータ</h2>
-  <p>食事の記録、体重、身長・年齢・性別・目標などの入力データは、<strong>お使いの端末のブラウザ内（localStorage）にのみ保存</strong>されます。これらが当方のサーバーへ送信・保存されることはありません。ブラウザのデータを消去すると記録も削除されます。</p>
+  <p>食事の記録、体重、身長・年齢・性別・目標などの入力データは、<strong>お使いの端末のブラウザ内（localStorage）にのみ保存</strong>されます。これらが当方のサーバーに保存されることはありません（AI機能が動いている間に限り、相棒AIとの会話に必要な範囲の数値が一時的に送られます。詳細は次項）。ブラウザのデータを消去すると記録も削除されます。</p>
 
-  <h2>2. 写真・会話の外部AIへの送信</h2>
-  <p>本サービスの中核機能のため、以下のデータを外部のAI提供事業者 <strong>Anthropic（Claude API）</strong> に送信します。</p>
+  <h2>2. 写真・会話の外部AIへの送信（現在は停止中）</h2>
+  <p>写真からの栄養推定と相棒AIとの会話は、外部のAI提供事業者 <strong>Anthropic（Claude API）</strong> を使う機能です。ただし<strong>この2つの機能は2026年9月3日から停止しており、現在、写真も会話も Anthropic には送信されません。</strong></p>
   <ul>
-    <li><strong>食事の写真</strong>：栄養（PFC）を推定する目的で送信します。</li>
-    <li><strong>相棒AIとの会話・その日の栄養数値</strong>：応答を生成する目的で送信します。</li>
+    <li><strong>停止中の動き</strong>：写真を選んだとき・相棒にメッセージを送ったとき、アプリはその内容を当サイト内のAI用の窓口に送ろうとしますが、窓口は停止中のため、受け取った内容を読まず・保存せず・Anthropic にも転送せず、「停止中」の応答を返すだけです。写真は端末の画面に表示されるだけで、解析されません（内蔵の食品リストのどれかが仮に入るだけです）。当サイトの通信は Cloudflare の基盤を経由します。</li>
+    <li><strong>再開した場合に Anthropic へ送る内容</strong>：食事の写真（栄養を推定する目的）、相棒AIとの会話（直近の発言・目標と今日の栄養数値・達成日数・今日の食事名・目標モード）。再開する場合は、本ポリシーの更新と回数制限などの対策を先に行います。</li>
   </ul>
-  <p>送信データは解析・応答生成のためだけに利用され、<strong>当サービスでは保存しません</strong>。送信先での取り扱いは Anthropic のポリシーに従います（<a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic Privacy Policy</a>）。</p>
+  <p>再開後も、送信データは解析・応答生成のためだけに利用され、<strong>当サービスでは保存しません</strong>。送信先での取り扱いは Anthropic のポリシーに従います（<a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic Privacy Policy</a>）。</p>
 
   <h2>3. Cookie・アクセス解析</h2>
   <p>本サービスは、利便性の向上と利用状況の把握のため、Cookie および類似技術、アクセス解析ツール（Google Analytics 等）を利用する場合があります。これにより取得する情報は個人を特定しない統計情報です。Cookie はブラウザの設定で無効化できます。</p>
@@ -45,12 +45,12 @@
 
 
   <h2>5. 免責</h2>
-  <p>本サービスが表示する栄養値はAIによる<strong>概算・目安</strong>であり、正確性を保証するものではありません。健康・医療・栄養に関する判断は医師・管理栄養士等の専門家にご相談ください。</p>
+  <p>本サービスが表示する栄養値は、内蔵の食品データ（AI機能の再開後はAIによる推定を含む）に基づく<strong>概算・目安</strong>であり、正確性を保証するものではありません。健康・医療・栄養に関する判断は医師・管理栄養士等の専門家にご相談ください。</p>
 
   <h2>6. 改定・お問い合わせ</h2>
   <p>本ポリシーは必要に応じて予告なく改定されることがあります。改定後の内容は本ページに掲載した時点で効力を生じます。ご質問は<a href="/contact">お問い合わせ</a>ページよりご連絡ください。</p>
 
-  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-08-02">2026年8月2日</time>　最終更新：<time datetime="2026-09-03">2026年9月3日</time></p>
+  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-08-02">2026年8月2日</time>　最終更新：<time datetime="2026-11-12">2026年11月12日</time></p>
   <p class="muted">運営：mainichi-lab ／ <a href="/read/">読み物</a>・<a href="/about">運営者情報</a>・<a href="/disclaimer">免責事項</a>・<a href="/contact">お問い合わせ</a></p>
 </div>
 </html>
