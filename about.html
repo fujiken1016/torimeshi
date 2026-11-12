@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0c0e12">
 <title>運営者情報｜トレ飯相棒</title>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"運営者情報｜トレ飯相棒","url":"https://meshi.mainichi-lab.com/about","inLanguage":"ja","datePublished":"2026-08-02","dateModified":"2026-09-03"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"運営者情報｜トレ飯相棒","url":"https://meshi.mainichi-lab.com/about","inLanguage":"ja","datePublished":"2026-08-02","dateModified":"2026-11-12"}</script>
 <script src="/oc.js" defer></script>
-<meta name="description" content="トレ飯相棒の運営者情報。運営者・連絡先・提供サービスの概要と、栄養値がAIによる概算であることなどの免責事項を掲載しています。">
+<meta name="description" content="トレ飯相棒の運営者情報。運営者・連絡先・提供サービスの概要、目標PFCの計算式と数値の出所、現在停止中のAI機能、誤りの報告方法、免責事項を掲載しています。">
 <link rel="canonical" href="https://meshi.mainichi-lab.com/about">
 <meta property="og:title" content="運営者情報｜トレ飯相棒">
-<meta property="og:description" content="トレ飯相棒の運営者情報。運営者・連絡先・提供サービスの概要と、栄養値がAIによる概算であることなどの免責事項を掲載しています。">
+<meta property="og:description" content="トレ飯相棒の運営者情報。運営者・連絡先・提供サービスの概要、目標PFCの計算式と数値の出所、現在停止中のAI機能、誤りの報告方法、免責事項を掲載しています。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://meshi.mainichi-lab.com/about">
 <meta name="twitter:card" content="summary">
@@ -33,6 +33,22 @@
   <h2>本サービスについて</h2>
   <p>「トレ飯相棒」は、トレーニング愛好者（トレーニー）の日々の食事管理を支援する個人運営のWebサービスです。食事の写真からタンパク質・脂質・炭水化物（PFC）を推定し、目標に対する不足を相棒AIと一緒に埋めていくことを目的としています。</p>
 
+  <h2>しくみと数値の出所</h2>
+  <p>目標の計算は、推測ではなく決まった式で出しています（アプリのトップにも同じ説明があります）。</p>
+  <ul>
+    <li><strong>基礎代謝</strong>：Mifflin-St Jeor の式（10×体重kg＋6.25×身長cm−5×年齢、男性＋5・女性−161）に、週の運動頻度に応じた活動係数（1.375／1.55／1.725）を掛けて1日の消費カロリーの目安にしています。</li>
+    <li><strong>目標カロリーとPFC</strong>：増量期は消費＋300kcal、減量期は−400kcal、維持期はそのまま。たんぱく質は体重1kgあたり2.0g（増量）・2.4g（減量）・2.0g（維持）、脂質は同1.0g・0.8g・0.9gで置き、炭水化物は残りのカロリーから逆算します。</li>
+    <li><strong>内蔵の食品リスト</strong>：アプリに入っているのは27品目で、各品目のPFCは一般的な1食分の目安として置いた概算値です。出典つきで1品ずつ照合した値ではないため、実際に食べた量に合わせて記録前にスライダーで直す前提にしています。</li>
+    <li><strong>記録の置き場</strong>：食事・体重などの記録は、お使いの端末のブラウザ内（localStorage）にだけ保存されます。運営者側にデータの控えはなく、ブラウザのデータを消すと記録も消えます。</li>
+  </ul>
+
+  <h2>いま動いていない機能</h2>
+  <p>写真からのAI解析と、相棒AIとの会話は、2026年9月3日から<strong>停止しています</strong>。この2つの窓口が認証や回数制限のないまま公開されており、外部から誰でも従量課金を発生させられる状態だったためです。停止中は、これらの窓口が外部のAIを呼び出すことはありません。</p>
+  <p>写真を撮ると、写真の中身は解析されず、内蔵の食品リストのどれかが仮に当てはめられるだけです（写真に写った料理とは関係がありません）。記録の前に、食品を選び直すか数値を直してください。食事の記録・集計・グラフ・体重の推移・目標の計算は、これまでどおり使えます。再開する場合は、回数制限などの対策を入れてからにします。</p>
+
+  <h2>誤りのご指摘</h2>
+  <p>目標の計算式や食品の数値、記事の内容に誤りを見つけた場合は、<a href="/contact">お問い合わせ</a>から、どのページのどの数値かを添えてお知らせください。確認のうえ、誤りが確かめられたものは本文を直し、各ページ下部の「最終更新」の日付も更新します。</p>
+
   <h2>免責事項</h2>
   <ul>
     <li>本サービスが提供する栄養値・カロリー・目標値はAIおよび計算式による<strong>概算</strong>であり、正確性・完全性を保証しません。</li>
@@ -43,7 +59,7 @@
   </ul>
   <p>より詳しい内容は<a href="/disclaimer">免責事項</a>のページに掲載しています。</p>
 
-  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-08-02">2026年8月2日</time>　最終更新：<time datetime="2026-09-03">2026年9月3日</time></p>
+  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-08-02">2026年8月2日</time>　最終更新：<time datetime="2026-11-12">2026年11月12日</time></p>
   <p class="muted"><a href="/read/">読み物</a>・<a href="/privacy">プライバシーポリシー</a>・<a href="/disclaimer">免責事項</a>・<a href="/contact">お問い合わせ</a></p>
 </div>
 </html>
