@@ -1,7 +1,7 @@
 {
   "name": "トレ飯相棒",
   "short_name": "トレ飯相棒",
-  "description": "写真で食事を記録して、相棒AIと一緒にPFCを詰めていくトレーニー向けアプリ",
+  "description": "1日の目標カロリーとPFCを出して、食べたものを記録し、今日の残りを確認するトレーニー向け食事記録アプリ",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
