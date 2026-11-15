@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>トレ飯相棒｜1日の目標PFCが出る筋トレ向け食事記録アプリ｜無料</title>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"トレ飯相棒｜1日の目標PFCが出る筋トレ向け食事記録アプリ｜無料","url":"https://meshi.mainichi-lab.com/","inLanguage":"ja","datePublished":"2026-07-24","dateModified":"2026-11-12"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"トレ飯相棒｜1日の目標PFCが出る筋トレ向け食事記録アプリ｜無料","url":"https://meshi.mainichi-lab.com/","inLanguage":"ja","datePublished":"2026-07-24","dateModified":"2026-11-16"},{"@type":"WebApplication","name":"トレ飯相棒","url":"https://meshi.mainichi-lab.com/","applicationCategory":"HealthApplication","operatingSystem":"Web（ブラウザ）","inLanguage":"ja","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"description":"体重・身長・年齢・性別・目標・トレーニング頻度から、1日の目標カロリーとPFC（たんぱく質・脂質・炭水化物）を Mifflin-St Jeor 式で計算し、食べたものを足して今日の残りを確認できる食事記録ツール。"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"会員登録やログインは必要ですか。","acceptedAnswer":{"@type":"Answer","text":"必要ありません。記録はすべてブラウザの中（ローカルストレージ）に保存され、サーバーには送っていません。別の端末やシークレットウィンドウには引き継がれません。"}},{"@type":"Question","name":"PFCの数字は、そのまま守ればいいですか。","acceptedAnswer":{"@type":"Answer","text":"目安としてお使いください。式で出した値なので、体脂肪率や種目、生活の運動量までは見ていません。体重の推移を2〜3週間見て、動かなければカロリーを調整するのが現実的です。"}},{"@type":"Question","name":"食品リストに無いものを食べました。","acceptedAnswer":{"@type":"Answer","text":"近いものを選んで、P・F・Cのスライダーを実際の量に合わせて動かしてください。量の倍率（少なめ〜爆盛り）と組み合わせれば、たいていの食事は近い数字にできます。"}},{"@type":"Question","name":"増量と減量を切り替えたいです。","acceptedAnswer":{"@type":"Answer","text":"画面右上の「減量期／増量期／維持期」のボタンを押すか、設定（⚙️）から切り替えられます。切り替えると目標カロリーとPFCがその場で計算し直されます。"}},{"@type":"Question","name":"記録を全部消したいです。","acceptedAnswer":{"@type":"Answer","text":"設定（⚙️）の「データをリセット」で消せます。消したデータは元に戻せないので、必要な記録は先に控えておいてください。"}}]}]}</script>
 <script src="/oc.js" defer></script>
 <meta name="description" content="体重・身長・年齢から1日の目標カロリーとPFC（タンパク質・脂質・炭水化物）を自動計算。内蔵の食品リスト27品目から選んで記録し、今日の残りを確認できます。インストール不要・無料。">
 <link rel="canonical" href="https://meshi.mainichi-lab.com/">
@@ -100,7 +100,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .seg.modes button.on[data-m="cut"]{background:var(--c);border-color:var(--c);color:#04202b}
 .ob{padding:32px 22px 40px}
 .ob .face{font-size:60px;text-align:center;margin-bottom:12px;animation:bob 3s ease-in-out infinite}
-.ob h1{font-size:25px;font-weight:700;line-height:1.32;margin-bottom:8px}
+.ob .hi{font-size:25px;font-weight:700;line-height:1.32;margin:0 0 8px}
+.ob h1.kick{font-size:14px;font-weight:700;line-height:1.6;color:var(--accent);margin:0 0 6px}
 .ob .lead{color:var(--sub);font-size:14px;font-weight:600;margin-bottom:26px;line-height:1.65}
 .ob-links{margin-top:18px;font-size:14px;color:var(--dim);line-height:2;text-align:center}
 .ob-links a{color:var(--sub);text-decoration:none}
@@ -110,6 +111,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .target-preview .grid{display:flex;justify-content:space-between}.target-preview .g{text-align:center}
 .target-preview .g .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
 .target-preview .g .k{font-size:14px;font-weight:700;color:var(--dim);margin-top:3px}
+.page-updated time{white-space:nowrap}
+.input,.seg button{min-height:48px}
+.ob-calc{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:14px;line-height:1.7;color:var(--sub)}.ob-calc:empty{display:none}.ob-calc b{color:var(--ink);font-weight:700}
 .sheet{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;animation:fade .2s}
 .sheet .panel{background:var(--bg);width:100%;max-width:480px;margin:0 auto;border-radius:24px 24px 0 0;border-top:1px solid var(--line);max-height:94dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
   padding:8px 16px calc(30px + env(safe-area-inset-bottom));animation:up .28s cubic-bezier(.2,.9,.3,1)}
@@ -217,7 +221,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 <!-- ONBOARDING -->
 <div id="onboard" class="ob hidden">
   <div class="face">💪</div>
-  <h1>よお、相棒。<br>今日から一緒にやってこう。</h1>
+  <h1 class="kick">筋トレ向けPFC・カロリー計算＋食事記録</h1>
+  <p class="hi">よお、相棒。<br>今日から一緒にやってこう。</p>
   <p class="lead">説教はしない。ただ、お前のタンパク質が足りてるかだけは俺が毎日見てる。まず体のこと教えてくれ。</p>
   <div class="two">
     <div class="field"><label>体重 (kg)</label><input class="input o" id="ob-w" type="number" inputmode="decimal" placeholder="72"></div>
@@ -237,11 +242,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <div class="g"><div class="v" style="color:var(--f)" id="ob-f">–</div><div class="k">F 脂質</div></div>
       <div class="g"><div class="v" style="color:var(--c)" id="ob-c">–</div><div class="k">C 炭水化物</div></div>
       <div class="g"><div class="v" id="ob-k">–</div><div class="k">kcal</div></div>
-    </div></div>
+    </div>
+    <p class="ob-calc" id="ob-calc"></p></div>
   <button class="btn" id="ob-go">相棒とはじめる</button>
-  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-07-24">2026年7月24日</time>　最終更新：<time datetime="2026-11-12">2026年11月12日</time></p>
+  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-07-24">2026年7月24日</time>　最終更新：<time datetime="2026-11-16">2026年11月16日</time></p>
   <p class="ob-links">
     はじめる前に読むなら：<a href="/read/pfc-basics">PFCバランスの基本</a>・<a href="/read/food-log-habit">記録が続かない理由</a>・<a href="/read/eating-out-guide">外食・コンビニの選び方</a>・<a href="/read/weight-plateau">体重が動かない時期の考え方</a><br>
+    数字の出どころ：<a href="/read/protein-per-kg">体重別たんぱく質の早見表</a>・<a href="/read/calorie-mifflin">目標カロリーの早見表</a>・<a href="/read/protein-kcal-per-gram">たんぱく質1gあたりのkcal</a><br>
     <a href="/read/">読み物一覧</a> ・ <a href="/about">運営者情報</a> ・ <a href="/privacy">プライバシーポリシー</a> ・ <a href="/disclaimer">免責事項</a> ・ <a href="/contact">お問い合わせ</a>
   </p>
 </div>
@@ -378,6 +385,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <a href="/read/food-log-habit">📝 記録が続かない理由</a>
       <a href="/read/eating-out-guide">🏪 外食・コンビニの選び方</a>
       <a href="/read/weight-plateau">⚖️ 体重が動かない時期</a>
+      <a href="/read/protein-per-kg">🥩 体重別たんぱく質の早見表</a>
+      <a href="/read/calorie-mifflin">🔥 目標カロリーの早見表</a>
+      <a href="/read/protein-kcal-per-gram">📊 たんぱく質1gあたりのkcal</a>
     </div>
   </section>
 
@@ -437,17 +447,22 @@ function calcTargets(o){
   else if(o.mode==='cut'){kcal=tdee-400;pk=2.4;fk=0.8;}
   else{kcal=tdee;pk=2.0;fk=0.9;}
   const P=Math.round(w*pk),F=Math.round(w*fk),C=Math.max(0,Math.round((kcal-P*4-F*9)/4));
-  return{kcal:Math.round(kcal),P,F,C};
+  return{kcal:Math.round(kcal),P,F,C,bmr:Math.round(bmr),tdee:Math.round(tdee)};
 }
 const MODE_JP={bulk:'増量期',cut:'減量期',keep:'維持期'},MODE_CLS={bulk:'bulk',cut:'cut',keep:'keep'};
 
 /* onboarding */
 let obMode='cut',obAct=1.55,obSex='m';
 function readOb(){return{w:parseFloat(v('ob-w')),h:parseFloat(v('ob-h')),age:parseInt(v('ob-age')),sex:obSex,mode:obMode,act:obAct}}
-function obPreview(){const o=readOb();
-  if(!o.w){['p','f','c','k'].forEach(x=>document.getElementById('ob-'+x).textContent='–');return}
+function obPreview(){const o=readOb(),ex=!o.w;
+  if(ex){o.w=72;o.h=o.h||172;o.age=o.age||30;}
   const t=calcTargets(o);document.getElementById('ob-p').textContent=t.P+'g';document.getElementById('ob-f').textContent=t.F+'g';
-  document.getElementById('ob-c').textContent=t.C+'g';document.getElementById('ob-k').textContent=t.kcal;}
+  document.getElementById('ob-c').textContent=t.C+'g';document.getElementById('ob-k').textContent=t.kcal;
+  ['p','f','c','k'].forEach(x=>document.getElementById('ob-'+x).style.opacity=ex?'.6':'');
+  const pct=x=>Math.round(x/t.kcal*100),adj=o.mode==='bulk'?'＋300':o.mode==='cut'?'−400':'±0';
+  document.getElementById('ob-calc').innerHTML=(ex?'<b>入力前は例の値です</b>（体重72kg・身長172cm・30歳）。体重を入れると自分の数字に変わります。<br>':'')
+    +'基礎代謝 <b>'+t.bmr+'</b>kcal × 活動係数 '+o.act+' ＝ 維持 <b>'+t.tdee+'</b>kcal → '+MODE_JP[o.mode].slice(0,2)+'で'+adj+' ＝ 目標 <b>'+t.kcal+'</b>kcal<br>'
+    +'カロリーの内訳：P '+pct(t.P*4)+'%・F '+pct(t.F*9)+'%・C '+pct(t.C*4)+'%';}
 function segify(id,cb,attr){const box=document.getElementById(id);
   box.querySelectorAll('button').forEach(b=>b.onclick=()=>{box.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cb(b.dataset[attr]);});}
 function initOnboard(){
@@ -458,6 +473,7 @@ function initOnboard(){
     S={...o,buddy:'ゲイン',days:{},weights:[{k:todayKey(),w:o.w}]};save();
     document.getElementById('onboard').classList.add('hidden');document.getElementById('app').classList.remove('hidden');render();
     setTimeout(()=>celebrate('相棒契約、成立だ🤝','これからよろしくな。まず一食、記録してみよう。'),300);};
+  obPreview();
 }
 
 /* home */
