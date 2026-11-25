@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0e12">
+<title>減量期の−400kcalは週に何kg減る？体重別の早見表と週0.5〜1%の比較</title>
+<meta name="description" content="減量期の目標（維持−400kcal）を体脂肪1kg=7,000kcalで換算すると、1週間に約0.4kg・4週で1.6kgです。体重別に体重比（55kgで0.73%、100kgで0.40%）と、研究の週0.5〜1%との位置を計算しました。">
+<link rel="canonical" href="https://meshi.mainichi-lab.com/read/cut-400-per-week">
+<meta property="og:title" content="減量期の−400kcalは1週間に何kg減る？体重別の目安と、週0.5〜1%との比較">
+<meta property="og:description" content="−400kcalは週約0.4kg。体重55kgで0.73%、100kgで0.40%。研究の週0.5〜1%との位置を体重別に計算。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://meshi.mainichi-lab.com/read/cut-400-per-week">
+<meta property="og:image" content="https://meshi.mainichi-lab.com/read/img/cut-400-per-week/og_own.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://meshi.mainichi-lab.com/read/img/cut-400-per-week/og_own.jpg">
+<link rel="icon" href="/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/read.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8289616283786904" crossorigin="anonymous"></script>
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)(mainichi-lab|shoubu-lab)\.com$|^fujiken1016\.github\.io$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-XRJ40EFR6C');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-XRJ40EFR6C';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"減量期の−400kcalは1週間に何kg減る？体重別の目安と、週0.5〜1%との比較","image":"https://meshi.mainichi-lab.com/read/img/cut-400-per-week/og_own.jpg","inLanguage":"ja","mainEntityOfPage":"https://meshi.mainichi-lab.com/read/cut-400-per-week","author":{"@type":"Person","name":"フジケン","url":"https://meshi.mainichi-lab.com/about","sameAs":["https://note.com/fujiken818","https://qiita.com/fujiken818","https://github.com/fujiken1016"]},"publisher":{"@type":"Organization","name":"トレ飯相棒（毎日ラボ）"},"datePublished":"2026-11-25","dateModified":"2026-11-25"}</script>
+<style>nav.card ol{padding-left:1.4em}nav.card a{display:inline-flex;align-items:center;min-height:48px}h1,h2,h3,table td,nav.card a{word-break:auto-phrase;text-wrap:balance}</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <a class="logo" href="/">トレ飯<b>相棒</b></a>
+    <div class="navlinks">
+      <a href="/">計算</a>
+      <a href="/read/">読み物</a>
+      <a href="/about">運営者情報</a>
+    </div>
+  </nav>
+
+  <div class="crumb"><a href="/">ホーム</a> › <a href="/read/">読み物</a> › 減量期の−400kcalは週に何kg</div>
+
+  <h1>減量期の−400kcalは、1週間に何kg減る？<span class="h1s">体重別の早見表と、研究が示す「週0.5〜1%」との比較</span></h1>
+  <p class="meta"><span class="chip">食事管理の基礎</span><span>公開日：2026年11月25日</span></p>
+
+  <p class="lead"><strong>先に結論です。</strong>減量期の目標は、維持カロリーの−400kcalです。体脂肪1kgを7,000kcalとする計算では、1週間に約0.4kg、4週間で約1.6kg減る見込みです。体重比にすると、55kgで0.73%、80kgで0.50%、100kgで0.40%です。研究が示す「週0.5〜1%」より遅くなるのは、80kgを超える人です。</p>
+
+  <div class="card">
+    <div class="ct">この記事の数字の出どころ</div>
+    <p>目標カロリーは、アプリの計算式（<code>calcTargets</code>）の実行結果です（男性172cm・女性158cm、30歳、活動係数1.55。2026年11月25日に実行）。減少量は、体脂肪1kg＝7,000kcalとして割った計算値で、実測ではありません。</p>
+    <p>実行結果は、別言語（Python）で同じ式を書き直した値と照合しました。基礎代謝と維持カロリーは、男女17体重のうち9つで1kcalの丸めの差が出ただけで、体重比などの値は同じです。</p>
+  </div>
+
+  <nav class="card" aria-label="目次">
+    <div class="ct">目次</div>
+    <ol>
+      <li><a href="#keisan">−400kcalは、1週間に何kgの計算か</a></li>
+      <li><a href="#hyo">体重別に見ると、体重の何%か</a></li>
+      <li><a href="#josei">女性は、同じ−400kcalでも赤字の割合が大きい</a></li>
+      <li><a href="#kenkyu">研究の「週0.5〜1%」と比べる</a></li>
+      <li><a href="#kansan">1kgの換算値で、どれだけ変わるか</a></li>
+      <li><a href="#hall">実際は、計算より遅く減る</a></li>
+      <li><a href="#tsukai">この数字の使い方</a></li>
+      <li><a href="#chui">注意</a></li>
+      <li><a href="#matome">まとめ</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="keisan">−400kcalは、1週間に何kgの計算か</h2>
+  <p><strong>結論：−400kcalを7日続けると2,800kcalで、体脂肪1kgを7,000kcalとすると0.4kgです。4週間で1.6kg、12週間で4.8kgになります（2026年11月25日時点の計算値）。</strong></p>
+  <p>体脂肪1kgを7,000kcalとする目安は、神奈川県の解説に載っています（「体脂肪1キログラムは7,000キロカロリーに相当」。2025年11月25日更新、2026年11月25日に確認）。トレ飯相棒の減量期は、維持カロリーから400kcalを引いた値です。計算式は<a href="/read/calorie-mifflin">目標カロリーの出し方</a>に書きました。</p>
+  <p>ここで大事なのは、−400kcalが誰にとっても同じ量だという点です。体重が違っても、1日の赤字は400kcalのままです。だから、1週間に減る量（約0.4kg）も同じですが、体重に対する割合は、体重によって変わります。</p>
+
+  <h2 id="hyo">体重別に見ると、体重の何%か</h2>
+  <p><strong>結論：1週間0.4kgは、男性なら55kgで0.73%、70kgで0.57%、100kgで0.40%です。女性では50kgで0.80%、75kgで0.53%です。</strong>赤字が維持カロリーの何%になるかも、体重で動きます。</p>
+  <div class="tablewrap">
+    <p style="font-size:14px;color:var(--sub);margin:0 0 4px">← 表は横にスクロールできます（2026年11月25日時点の計算値）</p>
+    <table>
+<thead><tr><th scope="col">体重</th><th scope="col">維持の<br>目標kcal</th><th scope="col">減量期の<br>目標kcal</th><th scope="col">赤字は維持の<br>何%か</th><th scope="col">週の減少を<br>体重比にすると</th></tr></thead><tbody><tr><th scope="row">55kg</th><td>2,294</td><td>1,894</td><td>17.4%</td><td>0.73%</td></tr><tr><th scope="row">60kg</th><td>2,372</td><td>1,972</td><td>16.9%</td><td>0.67%</td></tr><tr><th scope="row">65kg</th><td>2,449</td><td>2,049</td><td>16.3%</td><td>0.62%</td></tr><tr><th scope="row">70kg</th><td>2,527</td><td>2,127</td><td>15.8%</td><td>0.57%</td></tr><tr><th scope="row">75kg</th><td>2,604</td><td>2,204</td><td>15.4%</td><td>0.53%</td></tr><tr><th scope="row">80kg</th><td>2,682</td><td>2,282</td><td>14.9%</td><td>0.50%</td></tr><tr><th scope="row">85kg</th><td>2,759</td><td>2,359</td><td>14.5%</td><td>0.47%</td></tr><tr><th scope="row">90kg</th><td>2,837</td><td>2,437</td><td>14.1%</td><td>0.44%</td></tr><tr><th scope="row">95kg</th><td>2,914</td><td>2,514</td><td>13.7%</td><td>0.42%</td></tr><tr><th scope="row">100kg</th><td>2,992</td><td>2,592</td><td>13.4%</td><td>0.40%</td></tr></tbody>
+    </table>
+  </div>
+  <figure class="tablewrap" style="margin:16px 0"><svg role="img" aria-labelledby="cg" viewBox="0 0 340 268" width="100%" style="min-width:300px;display:block;max-width:400px" xmlns="http://www.w3.org/2000/svg"><title id="cg">赤字が維持カロリーの何%か（男性、2026年11月25日時点の計算値）</title>
+    <g font-family="sans-serif" font-size="14" fill="#f3f6fa" paint-order="stroke" stroke="#0c0e12" stroke-width="4" stroke-linejoin="round">
+<rect x="56" y="6" width="244" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="32" width="236" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="58" width="229" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="84" width="222" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="110" width="215" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="136" width="209" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="162" width="203" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="188" width="197" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="214" width="192" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="240" width="187" height="16" rx="3" fill="#3aa0ff"/>
+<line x1="63" y1="2" x2="63" y2="266" stroke="#f3f6fa" stroke-dasharray="3 3"/>
+<text x="4" y="19">55kg</text><text x="306" y="19">17.4%</text>
+<text x="4" y="45">60kg</text><text x="298" y="45">16.9%</text>
+<text x="4" y="71">65kg</text><text x="291" y="71">16.3%</text>
+<text x="4" y="97">70kg</text><text x="284" y="97">15.8%</text>
+<text x="4" y="123">75kg</text><text x="277" y="123">15.4%</text>
+<text x="4" y="149">80kg</text><text x="271" y="149">14.9%</text>
+<text x="4" y="175">85kg</text><text x="265" y="175">14.5%</text>
+<text x="4" y="201">90kg</text><text x="259" y="201">14.1%</text>
+<text x="4" y="227">95kg</text><text x="254" y="227">13.7%</text>
+<text x="4" y="253">100kg</text><text x="249" y="253">13.4%</text></g></svg>
+    <figcaption style="font-size:14px;color:var(--sub);margin-top:6px">図：−400kcalが維持カロリーの何%にあたるか（男性172cm・30歳・活動係数1.55。アプリの計算式の実行結果、2026年11月25日）。体重が軽いほど、赤字の割合が大きくなります。</figcaption></figure>
+  <p style="font-size:14px;color:var(--sub)">出典：アプリの計算式の実行結果（男性172cm・30歳・活動係数1.55、2026年11月25日）。週の減少は0.4kg÷体重。</p>
+  <h2 id="josei">女性は、同じ−400kcalでも赤字の割合が大きい</h2>
+  <p><strong>結論：女性は基礎代謝が低いので、−400kcalの割合が男性より大きくなります。50kgで21.9%、60kgで20.2%、75kgで18.1%です（2026年11月25日時点の計算値）。</strong></p>
+  <div class="tablewrap">
+    <p style="font-size:14px;color:var(--sub);margin:0 0 4px">← 表は横にスクロールできます（2026年11月25日時点の計算値）</p>
+    <table>
+<thead><tr><th scope="col">体重</th><th scope="col">維持の<br>目標kcal</th><th scope="col">減量期の<br>目標kcal</th><th scope="col">赤字は維持の<br>何%か</th><th scope="col">週の減少を<br>体重比にすると</th></tr></thead><tbody><tr><th scope="row">50kg</th><td>1,824</td><td>1,424</td><td>21.9%</td><td>0.80%</td></tr><tr><th scope="row">55kg</th><td>1,901</td><td>1,501</td><td>21.0%</td><td>0.73%</td></tr><tr><th scope="row">60kg</th><td>1,979</td><td>1,579</td><td>20.2%</td><td>0.67%</td></tr><tr><th scope="row">65kg</th><td>2,056</td><td>1,656</td><td>19.5%</td><td>0.62%</td></tr><tr><th scope="row">70kg</th><td>2,134</td><td>1,734</td><td>18.7%</td><td>0.57%</td></tr><tr><th scope="row">75kg</th><td>2,211</td><td>1,811</td><td>18.1%</td><td>0.53%</td></tr></tbody>
+    </table>
+  </div>
+  <p style="font-size:14px;color:var(--sub)">出典：同上（女性158cm・30歳・活動係数1.55、2026年11月25日）。</p>
+  <figure class="tablewrap" style="margin:16px 0"><svg role="img" aria-labelledby="cf" viewBox="0 0 340 268" width="100%" style="min-width:300px;display:block;max-width:400px" xmlns="http://www.w3.org/2000/svg"><title id="cf">体重別の週あたり減少率（−400kcal・7,000kcal換算、2026年11月25日時点の計算値）</title>
+    <g font-family="sans-serif" font-size="14" fill="#f3f6fa" paint-order="stroke" stroke="#0c0e12" stroke-width="4" stroke-linejoin="round">
+<rect x="56" y="6" width="160" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="32" width="147" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="58" width="135" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="84" width="126" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="110" width="117" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="136" width="110" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="162" width="104" height="16" rx="3" fill="#a3adbd"/>
+<rect x="56" y="188" width="98" height="16" rx="3" fill="#a3adbd"/>
+<rect x="56" y="214" width="93" height="16" rx="3" fill="#a3adbd"/>
+<rect x="56" y="240" width="88" height="16" rx="3" fill="#a3adbd"/>
+<line x1="166" y1="2" x2="166" y2="266" stroke="#f3f6fa" stroke-dasharray="3 3"/>
+<text x="4" y="19">55kg</text><text x="222" y="19">0.73%</text>
+<text x="4" y="45">60kg</text><text x="209" y="45">0.67%</text>
+<text x="4" y="71">65kg</text><text x="197" y="71">0.62%</text>
+<text x="4" y="97">70kg</text><text x="188" y="97">0.57%</text>
+<text x="4" y="123">75kg</text><text x="179" y="123">0.53%</text>
+<text x="4" y="149">80kg</text><text x="172" y="149">0.50%</text>
+<text x="4" y="175">85kg</text><text x="166" y="175">0.47%</text>
+<text x="4" y="201">90kg</text><text x="160" y="201">0.44%</text>
+<text x="4" y="227">95kg</text><text x="155" y="227">0.42%</text>
+<text x="4" y="253">100kg</text><text x="150" y="253">0.40%</text></g></svg>
+    <figcaption style="font-size:14px;color:var(--sub);margin-top:6px">図：−400kcalを7,000kcal/kgで換算したときの、体重に対する1週間の減少率（男性172cm・30歳・活動係数1.55）。点線は0.5%で、灰色はそれを下回る体重です。</figcaption></figure>
+  <ul>
+    <li>男性55kgは、維持2,294kcalから−400kcalで、赤字は17.4%です。男性100kgでは13.4%です（アプリの計算式の実行結果、2026年11月25日）。</li>
+    <li>女性50kgは、維持1,824kcalから−400kcalで、赤字は21.9%と、表の中でいちばん大きくなります。目標は1,424kcalです。</li>
+    <li>体重比のペースは、体重が重いほど緩やかです。同じ−400kcalでも、100kgの人の体重比は、55kgの人の約半分です。</li>
+  </ul>
+
+  <h2 id="kenkyu">研究の「週0.5〜1%」と比べる</h2>
+  <p><strong>結論：Helms らの2014年の論文は、体重の減少を「週0.5〜1%程度」にすると筋肉を残しやすい、としています。−400kcalがこの範囲に入るのは、男性なら80kg以下、女性は表の全体重（50〜75kg）です。</strong></p>
+  <p>この目安は、大会に向けて減量する、自然なボディビルダーの準備を扱った論文のものです。一般の人の減量にそのまま当てはまるとは限りません。ここでは「筋トレをしながら減量するときの、研究上の目安の1つ」として並べます。</p>
+  <p>週0.5%の減量に必要な1日の赤字は、体重×0.005×7,000÷7で、体重（kg）×5kcalです。1%なら×10kcalです。70kgなら350〜700kcal、100kgなら500〜1,000kcalになります。</p>
+  <div class="tablewrap">
+    <p style="font-size:14px;color:var(--sub);margin:0 0 4px">← 男性は55〜100kg、女性は60・75kgを抜き出しています（BMI18.5未満になる体重は載せていません）（表は横にスクロールできます）（2026年11月25日時点の計算値）</p>
+    <table>
+<thead><tr><th scope="col">体重</th><th scope="col">週0.5〜1%に<br>当たる1日の赤字</th><th scope="col">−400kcalは</th></tr></thead><tbody><tr><th scope="row">55kg</th><td>275〜550kcal</td><td>範囲内</td></tr><tr><th scope="row">60kg</th><td>300〜600kcal</td><td>範囲内</td></tr><tr><th scope="row">65kg</th><td>325〜650kcal</td><td>範囲内</td></tr><tr><th scope="row">70kg</th><td>350〜700kcal</td><td>範囲内</td></tr><tr><th scope="row">75kg</th><td>375〜750kcal</td><td>範囲内</td></tr><tr><th scope="row">80kg</th><td>400〜800kcal</td><td>範囲内</td></tr><tr><th scope="row">85kg</th><td>425〜850kcal</td><td>下回る</td></tr><tr><th scope="row">90kg</th><td>450〜900kcal</td><td>下回る</td></tr><tr><th scope="row">95kg</th><td>475〜950kcal</td><td>下回る</td></tr><tr><th scope="row">100kg</th><td>500〜1000kcal</td><td>下回る</td></tr><tr><th scope="row">女性60kg</th><td>300〜600kcal</td><td>範囲内</td></tr><tr><th scope="row">女性75kg</th><td>375〜750kcal</td><td>範囲内</td></tr></tbody>
+    </table>
+  </div>
+  <figure class="tablewrap" style="margin:16px 0"><svg role="img" aria-labelledby="ci" viewBox="0 0 340 138" width="100%" style="min-width:300px;display:block;max-width:400px" xmlns="http://www.w3.org/2000/svg"><title id="ci">週0.5%に当たる1日の赤字（体重×5kcal）と−400kcalの比較（2026年11月25日時点の計算値）</title>
+    <g font-family="sans-serif" font-size="14" fill="#f3f6fa" paint-order="stroke" stroke="#0c0e12" stroke-width="4" stroke-linejoin="round">
+<rect x="56" y="6" width="151" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="32" width="193" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="58" width="220" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="84" width="248" height="16" rx="3" fill="#a3adbd"/>
+<rect x="56" y="110" width="275" height="16" rx="3" fill="#a3adbd"/>
+<line x1="56" y1="2" x2="56" y2="136" stroke="#f3f6fa" stroke-dasharray="3 3"/>
+<text x="4" y="19">55kg</text><text x="213" y="19">275kcal</text>
+<text x="4" y="45">70kg</text><text x="255" y="45">350kcal</text>
+<text x="4" y="71">80kg</text><text x="282" y="71">400kcal</text>
+<text x="4" y="97">90kg</text><text x="310" y="97">450kcal</text>
+<text x="4" y="123">100kg</text><text x="337" y="123">500kcal</text></g></svg>
+    <figcaption style="font-size:14px;color:var(--sub);margin-top:6px">図：研究の下限（週0.5%）に当たる1日の赤字。灰色は、−400kcalを上回る（＝−400kcalでは届かない）体重です。</figcaption></figure>
+  <p style="font-size:14px;color:var(--sub)">出典：Helms ほか（2014）の週0.5〜1%を、体脂肪1kg＝7,000kcalで1日の赤字に換算（2026年11月25日）。−400kcalが範囲内か、範囲の下限（体重×5kcal）を下回るかを判定。</p>
+  <ul>
+    <li>男性55〜80kgは、−400kcalが週0.5〜1%の範囲に入ります。80kgではちょうど下限の0.50%です（上の表の計算値）。</li>
+    <li>男性85kg以上は、−400kcalでは下限（425kcal以上）に届きません。100kgだと、下限の500kcalに対して100kcal足りません（上の表の計算値）。</li>
+    <li>範囲より小さいことは、間違いではありません。「穏やかな設定」ということです。ペースを上げるかどうかは、体脂肪の量や目的で決まります。</li>
+  </ul>
+
+  <h2 id="kansan">1kgの換算値で、どれだけ変わるか</h2>
+  <p><strong>結論：7,000kcalでなく7,700kcalで換算すると、週の減少は0.40kgから0.36kgに下がります。5kg減るまでの週数は、12.5週から13.8週に延びます。</strong></p>
+  <p>体脂肪1kgのエネルギー量は、資料によって数字が違います。同じ−400kcalでも、使う換算値で予測が変わります。</p>
+  <div class="tablewrap">
+    <p style="font-size:14px;color:var(--sub);margin:0 0 4px">← 表は横にスクロールできます（2026年11月25日時点の計算値）</p>
+    <table>
+<thead><tr><th scope="col">1kgあたりの換算</th><th scope="col">1週間</th><th scope="col">4週間</th><th scope="col">5kg減るまで</th><th scope="col">52週（静的な計算）</th></tr></thead><tbody><tr><th scope="row">7,000kcal/kg</th><td>0.40kg</td><td>1.60kg</td><td>12.5週</td><td>20.8kg</td></tr><tr><th scope="row">7,200kcal/kg</th><td>0.39kg</td><td>1.56kg</td><td>12.9週</td><td>20.2kg</td></tr><tr><th scope="row">7,700kcal/kg</th><td>0.36kg</td><td>1.45kg</td><td>13.8週</td><td>18.9kg</td></tr></tbody>
+    </table>
+  </div>
+  <figure class="tablewrap" style="margin:16px 0"><svg role="img" aria-labelledby="ch" viewBox="0 0 340 86" width="100%" style="min-width:300px;display:block;max-width:400px" xmlns="http://www.w3.org/2000/svg"><title id="ch">体脂肪1kgの換算値別の週あたりの減少（2026年11月25日時点の計算値）</title>
+    <g font-family="sans-serif" font-size="14" fill="#f3f6fa" paint-order="stroke" stroke="#0c0e12" stroke-width="4" stroke-linejoin="round">
+<rect x="56" y="6" width="120" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="32" width="117" height="16" rx="3" fill="#3aa0ff"/>
+<rect x="56" y="58" width="109" height="16" rx="3" fill="#3aa0ff"/>
+<line x1="58" y1="2" x2="58" y2="84" stroke="#f3f6fa" stroke-dasharray="3 3"/>
+<text x="4" y="19">7,000</text><text x="182" y="19">0.40kg</text>
+<text x="4" y="45">7,200</text><text x="179" y="45">0.39kg</text>
+<text x="4" y="71">7,700</text><text x="171" y="71">0.36kg</text></g></svg>
+    <figcaption style="font-size:14px;color:var(--sub);margin-top:6px">図：−400kcalを1週間続けた2,800kcalを、換算値（kcal/kg）で割った減少量（2026年11月25日の計算値）。</figcaption></figure>
+  <p style="font-size:14px;color:var(--sub)">出典：2,800kcal（400×7日）÷換算値（2026年11月25日）。52週の列は、体重が減っても−400kcalが続くとした静的な計算で、実際の見込みではありません。</p>
+  <p>換算値による差は、週に0.04kg（40g）ほどです。この差より、次の節で書く「体重が減ると赤字が縮む」影響のほうが大きくなります。</p>
+
+  <h2 id="hall">実際は、計算より遅く減る</h2>
+  <p><strong>結論：Hall らの2011年の論文は、静的な計算は体重の減少を多く見積もると述べています。静的な計算が「1年で約22kg」とする条件で、論文は、静的な値が動的なモデルの約2倍になると述べています。</strong>エネルギー摂取を2MJ/日（約480kcal）減らした場合の比較です。</p>
+  <ul>
+    <li>論文は、静的な計算が体重の変化に伴う、体のしくみの動的な適応を無視していると述べています。</li>
+    <li>体重が減ると、消費エネルギーも下がります。赤字が縮むので、同じ食事のままだと、減るペースは落ちていきます。</li>
+    <li>モデルの変化は「半分に約1年、ほぼ全部に約3年」と報告されています。</li>
+  </ul>
+  <p>この論文は、肥満の成人を平均したモデルです。筋トレをしている人や、すでに細い人の減量を、そのまま予測するものではありません。ただ、「0.4kg×52週＝約21kg」のように、長く引き伸ばす計算は当たらない、という考え方は使えます。</p>
+  <p>体重が動かない時期の見方は、<a href="/read/weight-plateau">体重が動かない時期の考え方</a>に書きました。7日平均の取り方も、そこにあります。</p>
+
+  <h2 id="tsukai">この数字の使い方</h2>
+  <ul>
+    <li>最初の2〜3週間は、「週0.4kg」を目安にします。日々の体重は、水分や食事で上下します。7日平均で見て、2〜3週間後に比べます。</li>
+    <li>ペースが速すぎるときは、赤字を減らします。体重比が週1%を超える場合は、研究の範囲を超えます。女性50kgの0.80%は範囲内です。</li>
+    <li>ペースが遅いときは、まず記録を見直します。食事の記録が抜けていることがあります。続けやすい記録の方法は<a href="/read/food-log-habit">食事記録が続かない理由</a>に書きました。</li>
+    <li>たんぱく質と脂質は、赤字の中でも守ります。減量期の脂質は<a href="/read/fat-08-per-kg-cut">体重の0.8g/kg</a>、たんぱく質は<a href="/read/protein-per-kg">体重別の目標</a>に書きました。</li>
+  </ul>
+
+  <h2 id="chui">注意</h2>
+  <div class="caution">
+    <div class="ct">ご確認ください</div>
+    <p>この記事の数字は、一般的な換算値と、トレ飯相棒の計算式にもとづく目安・概算です。体重の変化は、年齢・体格・活動量・睡眠・持病・服薬などで変わります。</p>
+    <p>BMIが18.5未満の方、18歳未満の方は、この表の対象ではありません。減量そのものを、医師・管理栄養士に相談してください。</p>
+    <p>持病のある方、通院中の方、妊娠中・授乳中の方、摂食障害の経験がある方は、自己判断で減量せず、必ず医師・管理栄養士などに相談してください。</p>
+  </div>
+  <p>この記事の限界も書いておきます。</p>
+  <ul>
+    <li>体脂肪1kg＝7,000kcalは、体重の変化を「すべて脂肪」とした目安です。実際の体重には、水分や筋肉の変化も含まれます。</li>
+    <li>「週0.5〜1%」は、大会準備の自然なボディビルダーを扱った論文の推奨です。一般の減量の基準ではありません。</li>
+    <li>Hall らのモデルは、肥満の成人の平均です。体脂肪が少ない人には、そのまま当てはまりません。</li>
+    <li>身長は、男性172cm、女性158cmで固定しています。同じ体重でも、身長が違えば、基礎代謝と「赤字の割合」は変わります。</li>
+  </ul>
+
+  <h2 id="matome">まとめ</h2>
+  <ul>
+    <li>−400kcalは、体脂肪1kg＝7,000kcalで換算すると、週約0.4kg、4週で約1.6kgです。</li>
+    <li>体重比は、55kgで0.73%、80kgで0.50%、100kgで0.40%。80kgを超えると、研究の週0.5〜1%の下限を下回ります。</li>
+    <li>換算値が7,700kcalなら、週0.36kgです。実際は、体重が減るほど赤字が縮み、静的な計算より遅くなります。</li>
+  </ul>
+
+  <h2 id="faq">よくある質問</h2>
+  <h3>減量期の−400kcalで、1週間に何kg減りますか？</h3>
+  <p>体脂肪1kgを7,000kcalとする静的な計算では、400×7＝2,800kcalで、1週間に約0.4kg、4週間で約1.6kgです（2026年11月25日時点の計算値）。実際の体重は、水分や食事量の波があり、日々大きく動きます。体重の動き方は2〜3週間の7日平均で見てください。</p>
+  <h3>−400kcalは、体重の何%にあたる減量ペースですか？</h3>
+  <p>1週間0.4kgを体重で割った値です。55kgで0.73%、70kgで0.57%、80kgで0.50%、100kgで0.40%になります（男性172cm・30歳・活動係数1.55の計算値）。体重が重いほど、体重比のペースは緩やかです。</p>
+  <h3>なぜ、予測どおりに体重が減らないのですか？</h3>
+  <p>Hall らの2011年の論文は、エネルギー不足から体重の変化を予測する静的な計算が、体重が減るにつれて消費エネルギーも下がることを無視していると述べています。そのため、時間がたつほど、静的な計算より体重は減りにくくなります。</p>
+
+  <h2>出典・参考</h2>
+  <ul class="srcs">
+    <li>神奈川県「まずは、1か月で1キログラム減を目指す」（体脂肪1kg＝7,000kcal。2025年11月25日更新、開いた日 2026年11月25日）<br><a href="https://www.pref.kanagawa.jp/docs/mv4/kenken/contents13.html" target="_blank" rel="noopener">https://www.pref.kanagawa.jp/docs/mv4/kenken/contents13.html</a></li>
+    <li>Helms ER, Aragon AA, Fitschen PJ. Evidence-based recommendations for natural bodybuilding contest preparation: nutrition and supplementation. J Int Soc Sports Nutr. 2014;11:20（体重の減少は週0.5〜1%程度。開いた日 2026年11月25日）<br><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4033492/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC4033492/</a></li>
+    <li>Hall KD, Sacks G, Chandramohan D ほか. Quantification of the effect of energy imbalance on bodyweight. Lancet. 2011;378:826-837（静的な計算は体重の減少を多く見積もる。変化の半分に約1年。開いた日 2026年11月25日）<br><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3880593/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC3880593/</a></li>
+    <li>トレ飯相棒の目標計算式（アプリのコード <code>calcTargets</code>、2026年11月25日時点の実行結果）</li>
+  </ul>
+
+  <a class="cta" href="/">自分の目標カロリーを計算する →</a>
+  <p style="font-size:14px;color:var(--sub);text-align:center">次の1アクション：計算ページに体重・身長を入れて減量期の目標を出し、2〜3週間の7日平均で、週0.4kg前後かどうかを確かめます。</p>
+
+  <p class="page-updated" data-page-updated style="margin:16px 0 6px;font-size:15px;line-height:1.9;color:var(--sub,#a9a9be);text-align:center">公開：<time datetime="2026-11-25">2026年11月25日</time></p>
+  <div class="foot">
+    <div class="fl">
+      <a href="/">計算ページ（トップ）</a>
+      <a href="/read/">読み物一覧</a>
+      <a href="/read/pfc-basics">PFCバランスの基本</a>
+      <a href="/read/calorie-mifflin">目標カロリーの出し方</a>
+      <a href="/read/weight-plateau">体重が動かない時期の考え方</a>
+      <a href="/read/fat-08-per-kg-cut">減量期の脂質0.8g/kg</a>
+      <a href="/read/protein-per-meal">たんぱく質は1食に何g</a>
+      <a href="/about">運営者情報</a>
+      <a href="/privacy">プライバシーポリシー</a>
+      <a href="/contact">お問い合わせ</a>
+    </div>
+    © 2026 トレ飯相棒（運営：フジケン）
+  </div>
+
+</div>
+</body>
+</html>
